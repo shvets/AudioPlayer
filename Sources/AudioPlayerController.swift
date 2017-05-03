@@ -15,15 +15,15 @@ open class AudioPlayerController: UIViewController, AudioPlayerUI {
   
   var audioPlayer = AudioPlayer.shared
 
-  @IBOutlet private weak var playbackSlider: UISlider!
-  @IBOutlet private weak var playPauseButton: UIButton!
-  @IBOutlet private weak var replayButton: UIButton!
-  @IBOutlet private weak var stopButton: UIButton!
-  @IBOutlet private weak var currentTimeLabel: UILabel!
-  @IBOutlet private weak var durationLabel: UILabel!
-  @IBOutlet private weak var volumeSlider: UISlider!
-  @IBOutlet private weak var titleLabel: UILabel!
-  @IBOutlet private weak var indicator: UIActivityIndicatorView!
+  @IBOutlet fileprivate weak var playbackSlider: UISlider!
+  @IBOutlet fileprivate weak var playPauseButton: UIButton!
+  @IBOutlet fileprivate weak var replayButton: UIButton!
+  @IBOutlet fileprivate weak var stopButton: UIButton!
+  @IBOutlet fileprivate weak var currentTimeLabel: UILabel!
+  @IBOutlet fileprivate weak var durationLabel: UILabel!
+  @IBOutlet fileprivate weak var volumeSlider: UISlider!
+  @IBOutlet fileprivate weak var titleLabel: UILabel!
+  @IBOutlet fileprivate weak var indicator: UIActivityIndicatorView!
 
   override open func viewDidLoad() {
     super.viewDidLoad()
