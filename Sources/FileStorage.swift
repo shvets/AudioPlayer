@@ -26,7 +26,12 @@ open class FileStorage: Storage {
 
 //    return try unbox(data: contents!)
     //as! [String: StorageProperty]
-    return JsonConverter.toItems(contents!)
+    if let contents = contents {
+      return JsonConverter.toItems(contents)
+    }
+    else {
+      return [:]
+    }
   }
 
   override public func saveStorage(_ items: [String: Any]) throws {

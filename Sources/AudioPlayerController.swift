@@ -53,6 +53,14 @@ open class AudioPlayerController: UIViewController, AudioPlayerUI {
     audioPlayer.save()
   }
 
+//  override open var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+//    return UIInterfaceOrientationMask.portrait
+//  }
+//
+//  override open var shouldAutorotate: Bool {
+//    return false
+//  }
+  
   @IBAction func volumeSliderValueChanged() {
     audioPlayer.changeVolume(volumeSlider.value)
   }

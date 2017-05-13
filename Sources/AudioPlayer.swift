@@ -24,7 +24,7 @@ open class AudioPlayer: NSObject {
 
   let audioSession = AVAudioSession.sharedInstance()
 
-  var timeObserver: AnyObject!
+  var timeObserver: AnyObject?
 
   var currentAudioItem: AudioItem {
     return items[currentTrackIndex]
@@ -187,7 +187,7 @@ open class AudioPlayer: NSObject {
     }
 
     if let value = audioPlayerSettings.items["currentBookId"] {
-      currentBookId = value as! String
+      currentBookId = value as? String ?? ""
     }
 
     if let value = audioPlayerSettings.items["currentTrackIndex"] {
@@ -212,14 +212,17 @@ open class AudioPlayer: NSObject {
   }
 
   private func getMediaUrl(path: String) -> URL? {
-    let link = path.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
+    var url: URL? = nil
 
-    if link != "" {
-      return NSURL(string: link)! as URL
+    let link = path.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
+
+    if let link = link {
+      if !link.isEmpty {
+        url = NSURL(string: link) as? URL
+      }
     }
-    else {
-      return nil
-    }
+
+    return url
   }
 
 #endif
@@ -236,15 +239,15 @@ extension AudioPlayer {
     let isNewPlayer = currentTrackIndex == -1 || isAnotherBook || isAnotherTrack
 
     if isAnotherBook {
-      currentBookId = selectedBookId!
+      currentBookId = selectedBookId ?? ""
     }
 
-    currentTrackIndex = selectedItemId!
+    currentTrackIndex = selectedItemId ?? -1
 
     if isAnotherBook || isAnotherTrack {
       player.replaceCurrentItem(with: nil)
 
-      currentTrackIndex = selectedItemId!
+      currentTrackIndex = selectedItemId ?? -1
       currentSongPosition = -1
     }
 
@@ -642,7 +645,8 @@ extension AudioPlayer {
           nowPlayingInfo[MPMediaItemPropertyAlbumTitle] = bookName as AnyObject?
         }
 
-        if let url = NSURL(string: coverImageUrl!),
+        if let coverImageUrl = coverImageUrl,
+           let url = NSURL(string: coverImageUrl),
            let data = NSData(contentsOf: url as URL),
            let image = UIImage(data: data as Data) {
           nowPlayingInfo[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(image: image)

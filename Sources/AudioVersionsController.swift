@@ -36,7 +36,9 @@ open class AudioVersionsController: UITableViewController {
     pageLoader.spinner = PlainSpinner(activityIndicatorView)
 
     pageLoader.loadData { result in
-      self.items = result as! [AudioItem]
+      if let items = result as? [AudioItem] {
+        self.items = items
+      }
 
       self.tableView?.reloadData()
     }
@@ -63,7 +65,9 @@ open class AudioVersionsController: UITableViewController {
   }
 
   override open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    navigate(from: tableView.cellForRow(at: indexPath)!)
+    if let location = tableView.cellForRow(at: indexPath) {
+      navigate(from: location)
+    }
   }
 
   open func navigate(from view: UITableViewCell) {
@@ -81,11 +85,11 @@ open class AudioVersionsController: UITableViewController {
             destination.thumb = thumb
             destination.id = id
 
-            let cell = sender as! UITableViewCell
-            let indexPath = tableView?.indexPath(for: cell)!
-
-            destination.version = indexPath!.row
-            version = indexPath!.row
+            if let cell = sender as? UITableViewCell,
+               let indexPath = tableView?.indexPath(for: cell) {
+              destination.version = indexPath.row
+              version = indexPath.row
+            }
 
             destination.pageLoader.pageSize = pageLoader.pageSize
             destination.pageLoader.rowSize = pageLoader.rowSize

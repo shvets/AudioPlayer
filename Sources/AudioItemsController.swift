@@ -28,12 +28,17 @@ open class AudioItemsController: UITableViewController {
     title = name
 
     tableView?.backgroundView = activityIndicatorView
-    activityIndicatorView.center = (tableView?.center)!
+
+    if let center = tableView?.center {
+      activityIndicatorView.center = center
+    }
 
     pageLoader.spinner = PlainSpinner(activityIndicatorView)
 
     pageLoader.loadData { result in
-      self.items = result as! [AudioItem]
+      if let items = result as? [AudioItem] {
+        self.items = items
+      }
 
       self.tableView?.reloadData()
     }
@@ -57,7 +62,11 @@ open class AudioItemsController: UITableViewController {
   }
 
   func isSameBook() -> Bool {
-    return id! == AudioPlayer.shared.currentBookId
+    guard let id = id else {
+      return false
+    }
+
+    return id == AudioPlayer.shared.currentBookId
   }
 
   func isSameTrack(_ row: Int) -> Bool {
@@ -106,7 +115,9 @@ open class AudioItemsController: UITableViewController {
   }
 
   override open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    navigate(from: tableView.cellForRow(at: indexPath)!)
+    if let location = tableView.cellForRow(at: indexPath) {
+      navigate(from: location)
+    }
   }
 
   open func navigate(from view: UITableViewCell) {
@@ -120,11 +131,15 @@ open class AudioItemsController: UITableViewController {
       switch identifier {
         case AudioPlayerController.SegueIdentifier:
           if let destination = segue.destination as? AudioPlayerController {
-            destination.parentName = name!
-            destination.coverImageUrl = thumb!
+            destination.parentName = name ?? ""
+            destination.coverImageUrl = thumb ?? ""
             destination.items = items
-            destination.selectedBookId = id!
-            destination.selectedItemId = tableView?.indexPath(for: sender as! UITableViewCell)!.row
+            destination.selectedBookId = id ?? ""
+
+            if let cell = sender as? UITableViewCell,
+               let indexPath = tableView?.indexPath(for: cell) {
+              destination.selectedItemId = indexPath.row
+            }
           }
 
         default: break
