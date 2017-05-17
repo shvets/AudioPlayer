@@ -66,8 +66,14 @@ open class AudioPlayerController: UIViewController, AudioPlayerUI {
   }
 
   @IBAction func playbackSliderValueChanged(_ sender: UISlider) {
-    audioPlayer.changePlayerPosition(value: getPlayerValue())
-    audioPlayer.play()
+    //if audioPlayer.player.timeControlStatus == .playing {
+      audioPlayer.pause()
+      audioPlayer.changePlayerPosition(value: getPlayerValue())
+      audioPlayer.play()
+//    }
+//    else {
+//      audioPlayer.changePlayerPosition(value: getPlayerValue())
+//    }
   }
 
   @IBAction func prevAction() {

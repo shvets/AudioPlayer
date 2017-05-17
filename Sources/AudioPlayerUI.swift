@@ -1,4 +1,5 @@
 public protocol AudioPlayerUI: class {
+#if os(iOS)
   func startAnimate()
 
   func stopAnimate()
@@ -14,4 +15,6 @@ public protocol AudioPlayerUI: class {
   func getPlayerValue() -> Float
 
   func playbackProgressDidChange(duration: Double, currentTime: Double)
+
+#endif
 }

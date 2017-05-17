@@ -2,6 +2,7 @@ import AVFoundation
 import MediaPlayer
 
 open class AudioPlayer: NSObject {
+//, AVAssetResourceLoaderDelegate {
 
 #if os(iOS)
   public static let shared: AudioPlayer = {
@@ -18,6 +19,8 @@ open class AudioPlayer: NSObject {
     case paused
     case loading
   }
+
+  let notificationCenter = NotificationCenter.default
 
   static let audioPlayerSettingsFileName = NSHomeDirectory() + "/Library/Caches/audio-player-settings.json"
   lazy var audioPlayerSettings = FileStorage(audioPlayerSettingsFileName)
@@ -64,8 +67,6 @@ open class AudioPlayer: NSObject {
 
     handleRemoteCenter()
 
-    addNotifications()
-
 //    savePlayerPositionTimer = Timer.scheduledTimer(timeInterval: 5, target: self,
 //        selector: #selector(self.save), userInfo: nil, repeats: true);
 
@@ -91,6 +92,8 @@ open class AudioPlayer: NSObject {
 
     if let audioPath = getMediaUrl(path: path) {
       let asset = AVURLAsset(url: audioPath, options: nil)
+
+      //asset.resourceLoader.setDelegate(self, queue: DispatchQueue.main)
 
       let playerItem = AVPlayerItem(asset: asset)
 
@@ -307,7 +310,14 @@ extension AudioPlayer {
           self.updateNowPlayingInfoCenter()
 
           if let currentItem = self.player.currentItem {
-            self.removeNotifications(currentItem)
+            self.notificationCenter.addObserver(self, selector: #selector(self.handleAVPlayerItemDidPlayToEndTime),
+                name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: currentItem)
+
+            self.notificationCenter.addObserver(self, selector: #selector(self.handleAVPlayerItemPlaybackStalled),
+              name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: nil)
+
+            self.notificationCenter.addObserver(self, selector: #selector(self.handleAVAudioSessionInterruption),
+              name: NSNotification.Name.AVAudioSessionInterruption, object: AVAudioSession.sharedInstance())
           }
 
           let seconds = self.getPlayerPosition(songPosition)
@@ -436,6 +446,12 @@ extension AudioPlayer {
   }
 
   func handleAVPlayerItemDidPlayToEndTime(notification: Notification) {
+    if let currentItem = self.player.currentItem {
+      notificationCenter.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: currentItem)
+      notificationCenter.removeObserver(self, name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: nil)
+      notificationCenter.removeObserver(self, name: NSNotification.Name.AVAudioSessionInterruption, object: AVAudioSession.sharedInstance())
+    }
+
     save()
 
     if navigateToNextTrack() {
@@ -655,27 +671,6 @@ extension AudioPlayer {
         defaultNowPlayingInfoCenter.nowPlayingInfo = nowPlayingInfo
       }
     }
-  }
-
-  // MARK: Handle Notifications
-
-  func addNotifications() {
-    let notificationCenter = NotificationCenter.default
-
-    notificationCenter.addObserver(self, selector: #selector(self.handleAVPlayerItemPlaybackStalled),
-      name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: nil)
-
-    notificationCenter.addObserver(self, selector: #selector(self.handleAVAudioSessionInterruption),
-      name: NSNotification.Name.AVAudioSessionInterruption, object: AVAudioSession.sharedInstance())
-  }
-
-  func removeNotifications(_ object: Any) {
-    let notificationCenter = NotificationCenter.default
-
-    notificationCenter.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: object)
-
-    notificationCenter.addObserver(self, selector: #selector(self.handleAVPlayerItemDidPlayToEndTime),
-      name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: object)
   }
 
 #endif
