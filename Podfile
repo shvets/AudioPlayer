@@ -21,7 +21,7 @@ target 'AudioPlayer_tvOS' do
 end
 
 target 'AudioPlayer_macOS' do
-  platform :macos, '10.10'
+  platform :osx, '10.10'
 
   podspec :path => 'AudioPlayer.podspec'
 
