@@ -1,4 +1,8 @@
+#if os(iOS)
+
 import UIKit
+
+#endif
 
 open class PlainSpinner: Spinner {
   open var view: UIActivityIndicatorView

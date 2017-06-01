@@ -226,7 +226,7 @@ open class AudioPlayer: NSObject {
 
     if let link = link {
       if !link.isEmpty {
-        url = NSURL(string: link) as? URL
+        url = NSURL(string: link) as URL
       }
     }
 
@@ -670,7 +670,12 @@ extension AudioPlayer {
            let url = NSURL(string: coverImageUrl),
            let data = NSData(contentsOf: url as URL),
            let image = UIImage(data: data as Data) {
-          nowPlayingInfo[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(image: image)
+
+          let artwork = MPMediaItemArtwork.init(boundsSize: image.size, requestHandler: { (size) -> UIImage in
+            return image
+          })
+
+          nowPlayingInfo[MPMediaItemPropertyArtwork] = artwork
         }
 
         defaultNowPlayingInfoCenter.nowPlayingInfo = nowPlayingInfo
