@@ -1,4 +1,9 @@
+#if os(iOS)
+
 import UIKit
+
+#endif
+
 import AVFoundation
 
 open class AudioItemsController: UITableViewController {

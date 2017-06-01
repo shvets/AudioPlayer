@@ -1,5 +1,10 @@
 import AVFoundation
+
+#if os(iOS)
+
 import MediaPlayer
+
+#endif
 
 open class AudioPlayer: NSObject {
 //, AVAssetResourceLoaderDelegate {
