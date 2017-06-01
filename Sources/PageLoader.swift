@@ -1,3 +1,5 @@
+import Foundation
+
 public class PageLoader {
   private let dispatchQueue = DispatchQueue(label: "Dispatch Queue", attributes: [], target: nil)
 

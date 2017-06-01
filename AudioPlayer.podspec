@@ -16,4 +16,6 @@ Pod::Spec.new do |s|
 
   s.source = { :git => "https://github.com/shvets/AudioPlayer.git", :tag => s.version }
   s.source_files = "Sources/**/*.swift"
+
+  s.dependency 'SwiftyJSON', '~> 3.1.4'
 end
