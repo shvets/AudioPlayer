@@ -1,6 +1,11 @@
+#if os(iOS)
+
 import UIKit
-import AVFoundation
 import MediaPlayer
+
+#endif
+
+import AVFoundation
 
 open class AudioPlayerController: UIViewController, AudioPlayerUI {
   public static let SegueIdentifier = "Audio Player"
