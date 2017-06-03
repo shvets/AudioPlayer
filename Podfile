@@ -22,14 +22,14 @@ target 'AudioPlayer_tvOS' do
   end
 end
 
-target 'AudioPlayer_macOS' do
-  platform :osx, '10.10'
-
-  use_frameworks!
-
-  podspec :path => 'AudioPlayer.podspec'
-
-  target 'AudioPlayer_macOSTests' do
-    inherit! :search_paths
-  end
-end
+# target 'AudioPlayer_macOS' do
+#   platform :osx, '10.10'
+#
+#   use_frameworks!
+#
+#   podspec :path => 'AudioPlayer.podspec'
+#
+#   target 'AudioPlayer_macOSTests' do
+#     inherit! :search_paths
+#   end
+# end
