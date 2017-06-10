@@ -2,9 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:../SwiftyJSON/SwiftyJSON.xcodeproj">
+      location = "group:AudioPlayer.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:AudioPlayer.xcodeproj">
+      location = "group:Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>

@@ -1,15 +1,15 @@
 //
-//  AudioPlayerTests.swift
-//  AudioPlayerTests
+//  AudioPlayer_tvOSTests.swift
+//  AudioPlayer_tvOSTests
 //
-//  Created by Alexander Shvets on 4/18/17.
-//  Copyright © 2017 Alexander Shvets. All rights reserved.
+//  Created by Alexander Shvets on 6/9/17.
+//
 //
 
 import XCTest
-@testable import AudioPlayer
+@testable import AudioPlayer_tvOS
 
-class AudioPlayerTests: XCTestCase {
+class AudioPlayer_tvOSTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
