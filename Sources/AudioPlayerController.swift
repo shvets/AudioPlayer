@@ -20,6 +20,7 @@ open class AudioPlayerController: UIViewController, AudioPlayerUI {
   
   var audioPlayer = AudioPlayer.shared
 
+  @IBOutlet fileprivate weak var poster: UIImageView!
   @IBOutlet fileprivate weak var playbackSlider: UISlider!
   @IBOutlet fileprivate weak var playPauseButton: UIButton!
   @IBOutlet fileprivate weak var replayButton: UIButton!
@@ -41,6 +42,16 @@ open class AudioPlayerController: UIViewController, AudioPlayerUI {
     audioPlayer.ui = self
 
     audioPlayer.coverImageUrl = coverImageUrl
+
+    let url = NSURL(string: coverImageUrl)!
+
+    let data = NSData(contentsOf: url as URL)
+
+    if let data = data {
+      if poster != nil {
+        poster.image = UIImage(data: data as Data)
+      }
+    }
 
     audioPlayer.authorName = getAuthorName(parentName)
     audioPlayer.bookName = getBookName(parentName)
@@ -205,16 +216,20 @@ extension AudioPlayerController {
   }
 
   private func formatTime(_ time: Double) -> String {
-    return String(format: "%02d", getMinutes(time)) + ":" + String(format: "%02d", getSeconds(time))
+    let (hours, minutes, seconds) = timeToHoursMinutesSeconds(time: Int(time))
+    
+    if hours > 0 {
+      return String(format: "%i:%02i:%02i", hours, minutes, seconds)
+    }
+    else {
+      return String(format: "%02i:%02i", minutes, seconds)
+    }
+  }
+  
+  func timeToHoursMinutesSeconds (time: Int) -> (Int, Int, Int) {
+    return (time / 3600, (time % 3600) / 60, (time % 3600) % 60)
   }
 
-  private func getMinutes(_ time: Double) -> Int {
-    return Int(time / 60)
-  }
-
-  private func getSeconds(_ time: Double) -> Int {
-    return Int(time) - getMinutes(time) * 60
-  }
 
 #endif
 
