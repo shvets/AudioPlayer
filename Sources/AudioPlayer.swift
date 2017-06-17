@@ -282,10 +282,12 @@ extension AudioPlayer {
     else {
       ui?.update()
 
+      print("init: \(status)")
       if status == .playing {
         ui?.startAnimate()
         ui?.stopAnimate()
         startProgressTimer()
+        print("init: displayPause1")
         ui?.displayPause()
       }
       else if status == .ready {
@@ -295,12 +297,14 @@ extension AudioPlayer {
         ui?.startAnimate()
         ui?.stopAnimate()
         startProgressTimer()
+        print("init: displayPlay")
         ui?.displayPlay()
       }
       else {
         ui?.startAnimate()
         ui?.stopAnimate()
         startProgressTimer()
+        print("init: displayPause2")
         ui?.displayPause()
       }
     }
@@ -347,6 +351,7 @@ extension AudioPlayer {
   }
 
   func play(newPlayer: Bool=false, songPosition: Float=0) {
+    print("play")
     ui?.displayPlay()
 
     createNewPlayer(newPlayer: newPlayer, songPosition: songPosition)
@@ -360,6 +365,7 @@ extension AudioPlayer {
   }
 
   func pause() {
+    print("pause")
     ui?.displayPause()
 
     status = Status.paused
@@ -394,6 +400,8 @@ extension AudioPlayer {
   }
 
   func stop() {
+    print("stop")
+
     pause()
 
     player.replaceCurrentItem(with: nil)
