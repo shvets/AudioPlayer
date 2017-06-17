@@ -48,7 +48,7 @@ open class AudioPlayer: NSObject {
   public var currentSongPosition: Float = -1
   public var items: [AudioItem] = []
 
-  var coverImageUrl: String?
+  public var coverImage: UIImage?
   var authorName: String?
   var bookName: String?
   var selectedBookId: String?
@@ -106,6 +106,13 @@ open class AudioPlayer: NSObject {
     }
     else {
       player.replaceCurrentItem(with: nil)
+    }
+  }
+  
+  func setCoverImage(urlPath: String) {
+    if let url = NSURL(string: urlPath),
+       let data = NSData(contentsOf: url as URL) {
+      coverImage = UIImage(data: data as Data)
     }
   }
 
@@ -666,13 +673,9 @@ extension AudioPlayer {
           nowPlayingInfo[MPMediaItemPropertyAlbumTitle] = bookName as AnyObject?
         }
 
-        if let coverImageUrl = coverImageUrl,
-           let url = NSURL(string: coverImageUrl),
-           let data = NSData(contentsOf: url as URL),
-           let image = UIImage(data: data as Data) {
-
-          let artwork = MPMediaItemArtwork.init(boundsSize: image.size, requestHandler: { (size) -> UIImage in
-            return image
+        if let coverImage = coverImage {
+          let artwork = MPMediaItemArtwork.init(boundsSize: coverImage.size, requestHandler: { (size) -> UIImage in
+            return coverImage
           })
 
           nowPlayingInfo[MPMediaItemPropertyArtwork] = artwork

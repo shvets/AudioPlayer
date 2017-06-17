@@ -41,18 +41,10 @@ open class AudioPlayerController: UIViewController, AudioPlayerUI {
 
     audioPlayer.ui = self
 
-    audioPlayer.coverImageUrl = coverImageUrl
-
-    let url = NSURL(string: coverImageUrl)!
-
-    let data = NSData(contentsOf: url as URL)
-
-    if let data = data {
-      if poster != nil {
-        poster.image = UIImage(data: data as Data)
-      }
-    }
-
+    audioPlayer.setCoverImage(urlPath: coverImageUrl)
+  
+    poster.image = audioPlayer.coverImage
+  
     audioPlayer.authorName = getAuthorName(parentName)
     audioPlayer.bookName = getBookName(parentName)
 
