@@ -233,7 +233,7 @@ open class AudioPlayer: NSObject {
 
     if let link = link {
       if !link.isEmpty {
-        url = NSURL(string: link) as? URL
+        url = NSURL(string: link) as URL?
       }
     }
 
