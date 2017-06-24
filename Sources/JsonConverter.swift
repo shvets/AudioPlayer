@@ -26,15 +26,17 @@ open class JsonConverter {
   static func convertToDictionary(_ json: JSON) -> [String: Any] {
     var dict = [String: Any]()
 
-    for (key, value) in json.dictionaryObject! {
-      if value as? [String: Any] != nil {
-        dict[key] = value as! [String: Any]
-      }
-      else if value as? [Any] != nil {
-        dict[key] = value as! [Any]
-      }
-      else {
-        dict[key] = (value as! String).description
+    if let table = json.dictionaryObject {
+      for (key, value) in table {
+        if value as? [String: Any] != nil {
+          dict[key] = value as! [String: Any]
+        }
+        else if value as? [Any] != nil {
+          dict[key] = value as! [Any]
+        }
+        else {
+          dict[key] = (value as! String).description
+        }
       }
     }
 
@@ -44,15 +46,17 @@ open class JsonConverter {
   static func convertToArray(_ json: JSON) -> [Any] {
     var array = [Any]()
 
-    for value in json.arrayObject! {
-      if value as? [String: Any] != nil {
-        array.append(value)
-      }
-      else if value as? [Any] != nil {
-        array.append(value)
-      }
-      else {
-        array.append((value as! String).description)
+    if let ao = json.arrayObject {
+      for value in ao {
+        if value as? [String: Any] != nil {
+          array.append(value)
+        }
+        else if value as? [Any] != nil {
+          array.append(value)
+        }
+        else {
+          array.append((value as! String).description)
+        }
       }
     }
 
@@ -73,20 +77,30 @@ open class JsonConverter {
   }
 
   public static func prettified(_ items: [String: Any]) -> String {
-    let text = String(data: toData(items), encoding: String.Encoding.utf8)!
-
-    return text.replacingOccurrences(of: "\\/", with: "/")
+    if let text = String(data: toData(items), encoding: String.Encoding.utf8) {
+      return text.replacingOccurrences(of: "\\/", with: "/")
+    }
+    else {
+      return ""
+    }
   }
 
   public static func prettified(_ json: JSON) -> String {
-    let text = json.rawString(options: .prettyPrinted)
-
-    return text!.replacingOccurrences(of: "\\/", with: "/")
+    if let text = json.rawString(options: .prettyPrinted) {
+      return text.replacingOccurrences(of: "\\/", with: "/")
+    }
+    else {
+      return ""
+    }
   }
 
   public static func prettified(_ any: Any?) -> String {
-    let text = JSON(any!).rawString(options: .prettyPrinted)
-
-    return text!.replacingOccurrences(of: "\\/", with: "/")
+    if let any = any,
+       let text = JSON(any).rawString(options: .prettyPrinted) {
+      return text.replacingOccurrences(of: "\\/", with: "/")
+    }
+    else {
+      return ""
+    }
   }
 }

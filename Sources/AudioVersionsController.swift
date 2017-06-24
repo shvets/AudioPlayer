@@ -35,8 +35,10 @@ open class AudioVersionsController: UITableViewController {
 
     title = name
 
-    tableView?.backgroundView = activityIndicatorView
-    activityIndicatorView.center = (tableView?.center)!
+    if let tableView = tableView {
+      tableView.backgroundView = activityIndicatorView
+      activityIndicatorView.center = tableView.center
+    }
 
     pageLoader.spinner = PlainSpinner(activityIndicatorView)
 
