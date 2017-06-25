@@ -92,7 +92,9 @@ open class AudioPlayer: NSObject {
     savePlayerPositionTimer?.invalidate()
   }
 
-  func buildNewPlayer() {
+  func getNewPlayerItem() -> AVPlayerItem? {
+    var playerItem: AVPlayerItem?
+
     let path = items[currentTrackIndex].id
 
     if let audioPath = getMediaUrl(path: path) {
@@ -100,13 +102,14 @@ open class AudioPlayer: NSObject {
 
       //asset.resourceLoader.setDelegate(self, queue: DispatchQueue.main)
 
-      let playerItem = AVPlayerItem(asset: asset)
+      let duration = asset.duration.seconds
 
-      player.replaceCurrentItem(with: playerItem)
+      if duration > 0 {
+        playerItem = AVPlayerItem(asset: asset)
+      }
     }
-    else {
-      player.replaceCurrentItem(with: nil)
-    }
+
+    return playerItem
   }
   
   func setCoverImage(urlPath: String) {
@@ -250,8 +253,8 @@ extension AudioPlayer {
 
   func setupPlayer() {
     let isAnotherBook = currentBookId != selectedBookId
-    let isAnotherTrack = currentTrackIndex != selectedItemId
-    let isNewPlayer = currentTrackIndex == -1 || isAnotherBook || isAnotherTrack
+    let isAnotherTrack = isAnotherBook || currentTrackIndex != selectedItemId
+    let isNewPlayer = currentTrackIndex == -1 || isAnotherTrack
 
     if isAnotherBook {
       currentBookId = selectedBookId ?? ""
@@ -310,58 +313,75 @@ extension AudioPlayer {
     }
   }
 
-  func createNewPlayer(newPlayer: Bool=false, songPosition: Float=0) {
+  func createNewPlayer(newPlayer: Bool=false, songPosition: Float=0) -> Bool {
     if newPlayer || player.currentItem == nil {
-      buildNewPlayer()
+      if let playerItem = getNewPlayerItem() {
 
-      let asset = player.currentItem?.asset
+        player.replaceCurrentItem(with: playerItem)
 
-      ui?.startAnimate()
+        let asset = playerItem.asset
 
-      status = AudioPlayer.Status.loading
+        ui?.startAnimate()
 
-      asset?.loadValuesAsynchronously(forKeys: ["duration"], completionHandler: { () -> Void in
-        DispatchQueue.main.async { [unowned self] in
-          self.startBackgroundTask()
-          self.updateNowPlayingInfoCenter()
+        status = AudioPlayer.Status.loading
 
-          if let currentItem = self.player.currentItem {
-            self.notificationCenter.addObserver(self, selector: #selector(self.handleAVPlayerItemDidPlayToEndTime),
+        asset.loadValuesAsynchronously(forKeys: ["duration"], completionHandler: { () -> Void in
+          DispatchQueue.main.async { [unowned self] in
+            self.startBackgroundTask()
+            self.updateNowPlayingInfoCenter()
+
+            if let currentItem = self.player.currentItem {
+              self.notificationCenter.addObserver(self, selector: #selector(self.handleAVPlayerItemDidPlayToEndTime),
                 name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: currentItem)
 
-            self.notificationCenter.addObserver(self, selector: #selector(self.handleAVPlayerItemPlaybackStalled),
-              name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: nil)
+              self.notificationCenter.addObserver(self, selector: #selector(self.handleAVPlayerItemPlaybackStalled),
+                name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: nil)
 
-            self.notificationCenter.addObserver(self, selector: #selector(self.handleAVAudioSessionInterruption),
-              name: NSNotification.Name.AVAudioSessionInterruption, object: AVAudioSession.sharedInstance())
+              self.notificationCenter.addObserver(self, selector: #selector(self.handleAVAudioSessionInterruption),
+                name: NSNotification.Name.AVAudioSessionInterruption, object: AVAudioSession.sharedInstance())
+            }
+
+            let seconds = self.getPlayerPosition(songPosition)
+
+            self.seek(toSeconds: seconds)
+
+            self.ui?.update()
+
+            self.status = AudioPlayer.Status.ready
+
+            self.ui?.stopAnimate()
           }
-
-          let seconds = self.getPlayerPosition(songPosition)
-
-          self.seek(toSeconds: seconds)
-
-          self.ui?.update()
-
-          self.status = AudioPlayer.Status.ready
-
-          self.ui?.stopAnimate()
-        }
-      })
+        })
+      }
+      else {
+        return false
+      }
     }
+
+    return true
   }
 
   func play(newPlayer: Bool=false, songPosition: Float=0) {
-    print("play")
-    ui?.displayPlay()
+    if createNewPlayer(newPlayer: newPlayer, songPosition: songPosition) {
+      print("play")
+      ui?.displayPlay()
 
-    createNewPlayer(newPlayer: newPlayer, songPosition: songPosition)
+      startProgressTimer()
 
-    startProgressTimer()
+      status = Status.playing
+      player.play()
 
-    status = Status.playing
-    player.play()
+      ui?.displayPause()
+    }
+    else {
+      print("Cannot build player")
 
-    ui?.displayPause()
+      let alertView = UIAlertView();
+      alertView.addButton(withTitle: "Ok");
+      alertView.title = "Error";
+      alertView.message = "Cannot build player";
+      alertView.show();
+    }
   }
 
   func pause() {
