@@ -1,4 +1,5 @@
 import AVFoundation
+import UIKit
 
 #if os(iOS)
 
@@ -95,17 +96,17 @@ open class AudioPlayer: NSObject {
   func getNewPlayerItem() -> AVPlayerItem? {
     var playerItem: AVPlayerItem?
 
-    let path = items[currentTrackIndex].id
+    if let path = items[currentTrackIndex].id.removingPercentEncoding {
+      if let audioPath = getMediaUrl(path: path) {
+        let asset = AVURLAsset(url: audioPath, options: nil)
 
-    if let audioPath = getMediaUrl(path: path) {
-      let asset = AVURLAsset(url: audioPath, options: nil)
+        //asset.resourceLoader.setDelegate(self, queue: DispatchQueue.main)
 
-      //asset.resourceLoader.setDelegate(self, queue: DispatchQueue.main)
+        let duration = asset.duration.seconds
 
-      let duration = asset.duration.seconds
-
-      if duration > 0 {
-        playerItem = AVPlayerItem(asset: asset)
+        if duration > 0 {
+          playerItem = AVPlayerItem(asset: asset)
+        }
       }
     }
 
@@ -376,12 +377,34 @@ extension AudioPlayer {
     else {
       print("Cannot build player")
 
-      let alertView = UIAlertView();
-      alertView.addButton(withTitle: "Ok");
-      alertView.title = "Error";
-      alertView.message = "Cannot build player";
-      alertView.show();
+      let alert = UIAlertController(title: "Error", message: "Cannot build player", preferredStyle: .alert);
+
+      let okAction = UIAlertAction(title: "OK", style: .default)
+
+      alert.addAction(okAction)
+
+      if let controller = getTopViewController() {
+        controller.present(alert, animated: true)
+      }
     }
+  }
+
+  func getTopViewController(controller: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+    if let navigationController = controller as? UINavigationController {
+      return getTopViewController(controller: navigationController.visibleViewController)
+    }
+
+    if let tabController = controller as? UITabBarController {
+      if let selected = tabController.selectedViewController {
+        return getTopViewController(controller: selected)
+      }
+    }
+
+    if let presented = controller?.presentedViewController {
+      return getTopViewController(controller: presented)
+    }
+
+    return controller
   }
 
   func pause() {
