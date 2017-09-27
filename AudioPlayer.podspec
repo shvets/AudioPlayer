@@ -18,5 +18,5 @@ Pod::Spec.new do |s|
 
   s.dependency 'SwiftyJSON', '~> 3.1.4'
 
-  s.pod_target_xcconfig = { 'SWIFT_VERSION' => '3.1' }
+  s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4' }
 end
