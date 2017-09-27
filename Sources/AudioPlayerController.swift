@@ -114,7 +114,7 @@ open class AudioPlayerController: UIViewController, AudioPlayerUI {
 
   private func getAuthorName(_ name: String) -> String {
     if let index = name.range(of: "-")?.lowerBound {
-      return name[name.startIndex ..< name.index(index, offsetBy: -1)]
+      return String(name[name.startIndex ..< name.index(index, offsetBy: -1)])
     }
     else {
       return ""

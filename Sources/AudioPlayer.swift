@@ -29,7 +29,7 @@ open class AudioPlayer: NSObject {
   let notificationCenter = NotificationCenter.default
 
   static let audioPlayerSettingsFileName = NSHomeDirectory() + "/Library/Caches/audio-player-settings.json"
-  lazy var audioPlayerSettings = FileStorage(audioPlayerSettingsFileName)
+  lazy var audioPlayerSettings = FileStorage(AudioPlayer.audioPlayerSettingsFileName)
 
   let audioSession = AVAudioSession.sharedInstance()
 
@@ -508,7 +508,7 @@ extension AudioPlayer {
     play()
   }
 
-  func handleAVPlayerItemDidPlayToEndTime(notification: Notification) {
+  @objc func handleAVPlayerItemDidPlayToEndTime(notification: Notification) {
     if let currentItem = self.player.currentItem {
       notificationCenter.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: currentItem)
       notificationCenter.removeObserver(self, name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: nil)
@@ -531,13 +531,13 @@ extension AudioPlayer {
     }
   }
 
-  func handleAVPlayerItemPlaybackStalled() {
+  @objc func handleAVPlayerItemPlaybackStalled() {
     pause()
 
     play()
   }
 
-  func handleAVAudioSessionInterruption(_ notification: Notification) {
+  @objc func handleAVAudioSessionInterruption(_ notification: Notification) {
     guard let userInfo = notification.userInfo as? [String: AnyObject] else { return }
 
     guard let rawInterruptionType = userInfo[AVAudioSessionInterruptionTypeKey] as? NSNumber else { return }
@@ -611,7 +611,7 @@ extension AudioPlayer {
     DispatchQueue.main.asyncAfter(deadline: when, execute: closure)
   }
 
-  func doPlayPause(_ event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus {
+  @objc func doPlayPause(_ event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus {
     togglePlayPause()
 
     return .success
@@ -644,19 +644,19 @@ extension AudioPlayer {
     return .success
   }
 
-  func doPreviousTrack(_ event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus {
+  @objc func doPreviousTrack(_ event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus {
     playPrevious()
 
     return .success
   }
 
-  func doNextTrack(_ event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus {
+  @objc func doNextTrack(_ event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus {
     playNext()
 
     return .success
   }
 
-  func doPlaybackSliderValueChanged(_ event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus {
+  @objc func doPlaybackSliderValueChanged(_ event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus {
     if let playbackEvent = event as? MPChangePlaybackPositionCommandEvent {
       seek(toSeconds: Int(playbackEvent.positionTime))
 
