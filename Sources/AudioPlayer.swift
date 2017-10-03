@@ -29,7 +29,7 @@ open class AudioPlayer: NSObject {
   let notificationCenter = NotificationCenter.default
 
   static let audioPlayerSettingsFileName = NSHomeDirectory() + "/Library/Caches/audio-player-settings.json"
-  lazy var audioPlayerSettings = FileStorage(AudioPlayer.audioPlayerSettingsFileName)
+  lazy var audioPlayerSettings = Config(configName: AudioPlayer.audioPlayerSettingsFileName)
 
   let audioSession = AVAudioSession.sharedInstance()
 
@@ -198,15 +198,10 @@ open class AudioPlayer: NSObject {
   }
 
   func load() {
-    do {
-      try audioPlayerSettings.load()
-    }
-    catch {
-
-    }
+    audioPlayerSettings.load()
 
     if let value = audioPlayerSettings.items["currentBookId"] {
-      currentBookId = value as? String ?? ""
+      currentBookId = value
     }
 
     if let value = audioPlayerSettings.items["currentTrackIndex"] {
@@ -220,14 +215,10 @@ open class AudioPlayer: NSObject {
 
   func save() {
     audioPlayerSettings.add(key: "currentBookId", value: currentBookId)
-    audioPlayerSettings.add(key: "currentTrackIndex", value: currentTrackIndex)
-    audioPlayerSettings.add(key: "currentSongPosition", value: currentSongPosition)
-    do {
-      try audioPlayerSettings.save()
-    }
-    catch {
+    audioPlayerSettings.add(key: "currentTrackIndex", value: String(currentTrackIndex))
+    audioPlayerSettings.add(key: "currentSongPosition", value: String(currentSongPosition))
 
-    }
+    audioPlayerSettings.save()
   }
 
   private func getMediaUrl(path: String) -> URL? {
