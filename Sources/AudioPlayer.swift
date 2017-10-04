@@ -29,7 +29,7 @@ open class AudioPlayer: NSObject {
   let notificationCenter = NotificationCenter.default
 
   static let audioPlayerSettingsFileName = NSHomeDirectory() + "/Library/Caches/audio-player-settings.json"
-  lazy var audioPlayerSettings = Config(configName: AudioPlayer.audioPlayerSettingsFileName)
+  lazy var audioPlayerSettings = PlainConfig(AudioPlayer.audioPlayerSettingsFileName)
 
   let audioSession = AVAudioSession.sharedInstance()
 
