@@ -1,5 +1,6 @@
 import AVFoundation
 import UIKit
+import ConfigFile
 
 #if os(iOS)
 
@@ -29,7 +30,7 @@ open class AudioPlayer: NSObject {
   let notificationCenter = NotificationCenter.default
 
   static let audioPlayerSettingsFileName = NSHomeDirectory() + "/Library/Caches/audio-player-settings.json"
-  lazy var audioPlayerSettings = PlainConfig(AudioPlayer.audioPlayerSettingsFileName)
+  lazy var audioPlayerSettings = StringConfigFile(AudioPlayer.audioPlayerSettingsFileName)
 
   let audioSession = AVAudioSession.sharedInstance()
 
@@ -198,7 +199,12 @@ open class AudioPlayer: NSObject {
   }
 
   func load() {
-    audioPlayerSettings.load()
+    do {
+      try audioPlayerSettings.load()
+    }
+    catch let error {
+      print("Error loading config file: \(error)")
+    }
 
     if let value = audioPlayerSettings.items["currentBookId"] {
       currentBookId = value
@@ -218,7 +224,12 @@ open class AudioPlayer: NSObject {
     audioPlayerSettings.add(key: "currentTrackIndex", value: String(currentTrackIndex))
     audioPlayerSettings.add(key: "currentSongPosition", value: String(currentSongPosition))
 
-    audioPlayerSettings.save()
+    do {
+      try audioPlayerSettings.save()
+    }
+    catch let error {
+      print("Error saving config file: \(error)")
+    }
   }
 
   private func getMediaUrl(path: String) -> URL? {

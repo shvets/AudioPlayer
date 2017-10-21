@@ -1,12 +1,19 @@
 PODS:
+  - ConfigFile (1.0.0):
+    - Files (~> 1.9.0)
   - Files (1.9.0)
+  - PageLoader (1.0.0)
 
 DEPENDENCIES:
+  - ConfigFile (~> 1.0.0)
   - Files (~> 1.9.0)
+  - PageLoader (~> 1.0.0)
 
 SPEC CHECKSUMS:
+  ConfigFile: c40c446a2865a85594b81f083226c576cfd333dd
   Files: e5c828e13b7728fa88a6c0e30f42f0ffb536e333
+  PageLoader: e4ac308a5c082b8513a85b259798bb9dec6e8a89
 
-PODFILE CHECKSUM: b066309de19fc32adc7307f532a74b8c32cd863e
+PODFILE CHECKSUM: 862d5f6a196388baa6387290a80cd795bae1850b
 
-COCOAPODS: 1.3.1
+COCOAPODS: 1.4.0.beta.1

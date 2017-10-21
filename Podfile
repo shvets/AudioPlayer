@@ -1,3 +1,6 @@
+source 'https://github.com/CocoaPods/Specs.git'
+source 'https://github.com/shvets/Specs.git'
+
 target 'AudioPlayer_iOS' do
   platform :ios, '10.0'
 

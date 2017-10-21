@@ -1,6 +1,7 @@
 #if os(iOS)
 
 import UIKit
+import PageLoader
 
 #endif
 

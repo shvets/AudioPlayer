@@ -17,6 +17,8 @@ Pod::Spec.new do |s|
   s.source_files = "Sources/**/*.swift"
 
   s.dependency 'Files', '~> 1.9.0'
+  s.dependency 'ConfigFile', '~> 1.0.0'
+  s.dependency 'PageLoader', '~> 1.0.0'
 
   s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4' }
 end
