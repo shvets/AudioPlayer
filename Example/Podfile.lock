@@ -1,0 +1,26 @@
+PODS:
+  - AudioPlayer (1.0.8):
+    - ConfigFile (~> 1.0.0)
+    - Files (~> 1.9.0)
+    - PageLoader (~> 1.0.0)
+  - ConfigFile (1.0.0):
+    - Files (~> 1.9.0)
+  - Files (1.9.0)
+  - PageLoader (1.0.0)
+
+DEPENDENCIES:
+  - AudioPlayer (from `../`)
+
+EXTERNAL SOURCES:
+  AudioPlayer:
+    :path: ../
+
+SPEC CHECKSUMS:
+  AudioPlayer: d0ea3b9f01930003475b599de4029eab3e4934a7
+  ConfigFile: c40c446a2865a85594b81f083226c576cfd333dd
+  Files: e5c828e13b7728fa88a6c0e30f42f0ffb536e333
+  PageLoader: e4ac308a5c082b8513a85b259798bb9dec6e8a89
+
+PODFILE CHECKSUM: 77521fa5befee5e706e25c0861876c3b0fc7323d
+
+COCOAPODS: 1.4.0.beta.1

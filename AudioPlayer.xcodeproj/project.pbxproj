@@ -12,6 +12,7 @@
 		2DBA1141B8DA86520087840E /* Example.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1C9018194BDC8260DFE2 /* Example.swift */; };
 		61989521CCB1D3A23F67DE83 /* Pods_AudioPlayer_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6649E5051B566FB09E7993B /* Pods_AudioPlayer_iOS.framework */; };
 		948C23405F7BCA5D0A613BA6 /* Pods_AudioPlayer_tvOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B500518308169F8A79674E22 /* Pods_AudioPlayer_tvOSTests.framework */; };
+		FA202A4E1F9CEE8F0018A581 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA202A4D1F9CEE8F0018A581 /* Assets.xcassets */; };
 		FA6E5D7E1F9C2FF200F37147 /* AudioPlayer_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA6E5D751F9C2FF200F37147 /* AudioPlayer_tvOS.framework */; };
 		FA6E5D831F9C2FF200F37147 /* AudioPlayer_tvOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6E5D821F9C2FF200F37147 /* AudioPlayer_tvOSTests.swift */; };
 		FA6E5D851F9C2FF200F37147 /* AudioPlayer_tvOS.h in Headers */ = {isa = PBXBuildFile; fileRef = FA6E5D771F9C2FF200F37147 /* AudioPlayer_tvOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -63,6 +64,7 @@
 		D69EE93263EF1209BB6CCDA0 /* Pods-AudioPlayer_iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AudioPlayer_iOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AudioPlayer_iOSTests/Pods-AudioPlayer_iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E1E5C27C708481FE55EA1C14 /* Pods-AudioPlayer_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AudioPlayer_iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-AudioPlayer_iOS/Pods-AudioPlayer_iOS.release.xcconfig"; sourceTree = "<group>"; };
 		F5AAAA706A090EBAE4885C75 /* Pods_AudioPlayer_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AudioPlayer_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA202A4D1F9CEE8F0018A581 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FA3B73481EEB80CB00688761 /* AudioItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioItem.swift; sourceTree = "<group>"; };
 		FA3B73491EEB80CB00688761 /* AudioItemsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioItemsController.swift; sourceTree = "<group>"; };
 		FA3B734A1EEB80CB00688761 /* AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				FA3B734B1EEB80CB00688761 /* AudioPlayerController.swift */,
 				FA3B734C1EEB80CB00688761 /* AudioPlayerUI.swift */,
 				FA3B734D1EEB80CB00688761 /* AudioVersionsController.swift */,
+				FA202A4D1F9CEE8F0018A581 /* Assets.xcassets */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -400,6 +403,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA202A4E1F9CEE8F0018A581 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,8 +1,8 @@
 Pod::Spec.new do |s|
-  s.name         = "AudioPlayer"
-  s.version      = "1.0.8"
-  s.summary      = "Audio Player"
-  s.description  = "Audio Player description"
+  s.name         = "Example"
+  s.version      = "1.0.0"
+  s.summary      = "Audio Player Example"
+  s.description  = "Audio Player Example description"
 
   s.homepage     = "https://github.com/shvets/AudioPlayer"
   s.authors = { "Alexander Shvets" => "alexander.shvets@gmail.com" }
@@ -15,11 +15,7 @@ Pod::Spec.new do |s|
   #s.watchos.deployment_target = "2.0"
 
   s.source_files = "Sources/**/*.swift"
-  s.resources = "Sources/Assets/**/*.xcassets"
-
-  s.dependency 'Files', '~> 1.9.0'
-  s.dependency 'ConfigFile', '~> 1.0.0'
-  s.dependency 'PageLoader', '~> 1.0.0'
+  s.resources = "../Sources/Assets/**/*.xcassets"
 
   s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4' }
 end

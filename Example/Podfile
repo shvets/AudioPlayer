@@ -1,0 +1,26 @@
+source 'https://github.com/CocoaPods/Specs.git'
+source 'https://github.com/shvets/Specs.git'
+
+use_frameworks!
+
+target 'Example' do
+  platform :ios, '10.0'
+
+  pod 'AudioPlayer', :path => '../'
+
+  podspec :path => 'Example.podspec'
+
+  target 'ExampleTests' do
+    inherit! :search_paths
+  end
+end
+
+#target 'Example_tvOS' do
+#  platform :tvos, '10.10'
+
+#  pod 'AudioPlayer', :path => '../'
+
+#  target 'Example_tvOSTests' do
+#    inherit! :search_paths
+#  end
+#end
