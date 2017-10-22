@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (4.5.1)
   - AudioPlayer (1.0.8):
     - ConfigFile (~> 1.0.0)
     - Files (~> 1.9.0)
@@ -7,20 +8,35 @@ PODS:
     - Files (~> 1.9.0)
   - Files (1.9.0)
   - PageLoader (1.0.0)
+  - SwiftSoup (1.5.5)
+  - SwiftyJSON (3.1.4)
+  - WebAPI (1.0.11):
+    - Alamofire (~> 4.5.1)
+    - ConfigFile (~> 1.0.0)
+    - Files (~> 1.9.0)
+    - SwiftSoup (~> 1.5.5)
+    - SwiftyJSON (~> 3.1.4)
 
 DEPENDENCIES:
   - AudioPlayer (from `../`)
+  - WebAPI (from `../../WebAPI`)
 
 EXTERNAL SOURCES:
   AudioPlayer:
     :path: ../
+  WebAPI:
+    :path: ../../WebAPI
 
 SPEC CHECKSUMS:
+  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
   AudioPlayer: d0ea3b9f01930003475b599de4029eab3e4934a7
   ConfigFile: c40c446a2865a85594b81f083226c576cfd333dd
   Files: e5c828e13b7728fa88a6c0e30f42f0ffb536e333
   PageLoader: e4ac308a5c082b8513a85b259798bb9dec6e8a89
+  SwiftSoup: 6a31eb02551c9c523eea14aef9d9e70f1466ff99
+  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
+  WebAPI: 0061eae44ff5c48a9c7bcb484ca22fac2fe9bc0b
 
-PODFILE CHECKSUM: 77521fa5befee5e706e25c0861876c3b0fc7323d
+PODFILE CHECKSUM: fa1452028eabdcf755eb94bcdd97136bcc6e140b
 
 COCOAPODS: 1.4.0.beta.1

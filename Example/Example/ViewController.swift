@@ -1,5 +1,6 @@
 import UIKit
 import AudioPlayer
+import WebAPI
 
 class ViewController: UIViewController {
   override func viewDidLoad() {
@@ -18,15 +19,42 @@ class ViewController: UIViewController {
     // Pass the selected object to the new view controller.
     
     if let destination = segue.destination as? AudioPlayerController {
-      destination.coverImageUrl = "https://audioknigi.club/uploads/topics/preview/00/01/31/69/486d2f8ba2_200crop.jpg"
-      destination.parentName = "Акунин Борис - Сказки для идиотов"
-      destination.selectedBookId = "https://audioknigi.club/akunin-boris-skazki-dlya-idiotov"
-      destination.selectedItemId = 2
-      destination.items = [
-        AudioItem(name: "001.Вступление.mp3", id: "https://get.sweetbook.net/b/41196/VwMEFDUDpQvhCU2_Q3NKDs0u3pTNaVImZlHEy9IeOfs,/001.Вступление.mp3"),
-        AudioItem(name: "001.Вступление.mp3", id: "https://get.sweetbook.net/b/41196/VwMEFDUDpQvhCU2_Q3NKDs0u3pTNaVImZlHEy9IeOfs,/001.Вступление.mp3"),
-        AudioItem(name: "001.Вступление.mp3", id: "https://get.sweetbook.net/b/41196/VwMEFDUDpQvhCU2_Q3NKDs0u3pTNaVImZlHEy9IeOfs,/001.Вступление.mp3")
-      ]
+      do {
+        let api = AudioKnigiAPI()
+
+        let authors = try api.getAuthors()["movies"] as! [Any]
+
+        let author = authors.filter { item in
+          if let item = item as? [String: String] {
+            return item["name"] == "Мартин Джордж"
+          }
+          else {
+            return false
+          }
+        }.first
+        
+        if let author = author as? [String: String] {
+          let books = try api.getBooks(path: author["id"]!)["movies"] as! [Any]
+          
+          if let book = books[1] as? [String: String] {
+            let items = try api.getAudioTracks(book["id"]!)
+            
+            destination.coverImageUrl = book["thumb"]
+            destination.parentName = book["name"]
+            destination.selectedBookId = book["id"]
+            destination.selectedItemId = 0
+            
+            destination.items = []
+            
+            for item in items {
+              destination.items.append(AudioItem(name: item.title, id: item.url))
+            }
+          }
+        }
+      }
+      catch let error {
+        print("Errpr: \(error)")
+      }
     }
   }
   

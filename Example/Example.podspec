@@ -17,5 +17,7 @@ Pod::Spec.new do |s|
   s.source_files = "Sources/**/*.swift"
   s.resources = "../Sources/Assets/**/*.xcassets"
 
+#  s.dependency 'WebAPI', '~> 1.0.4'
+
   s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4' }
 end
