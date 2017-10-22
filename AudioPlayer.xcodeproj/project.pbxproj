@@ -8,7 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		2248DFD34466BDA9705577E2 /* Pods_AudioPlayer_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD0590F2845CB5B8E471F79E /* Pods_AudioPlayer_iOSTests.framework */; };
+		251AD75C3B8867D9B3877F65 /* Pods_AudioPlayer_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5AAAA706A090EBAE4885C75 /* Pods_AudioPlayer_tvOS.framework */; };
+		2DBA1141B8DA86520087840E /* Example.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1C9018194BDC8260DFE2 /* Example.swift */; };
 		61989521CCB1D3A23F67DE83 /* Pods_AudioPlayer_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6649E5051B566FB09E7993B /* Pods_AudioPlayer_iOS.framework */; };
+		948C23405F7BCA5D0A613BA6 /* Pods_AudioPlayer_tvOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B500518308169F8A79674E22 /* Pods_AudioPlayer_tvOSTests.framework */; };
+		FA6E5D7E1F9C2FF200F37147 /* AudioPlayer_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA6E5D751F9C2FF200F37147 /* AudioPlayer_tvOS.framework */; };
+		FA6E5D831F9C2FF200F37147 /* AudioPlayer_tvOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6E5D821F9C2FF200F37147 /* AudioPlayer_tvOSTests.swift */; };
+		FA6E5D851F9C2FF200F37147 /* AudioPlayer_tvOS.h in Headers */ = {isa = PBXBuildFile; fileRef = FA6E5D771F9C2FF200F37147 /* AudioPlayer_tvOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FA6E5D8C1F9C2FFF00F37147 /* AudioItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3B73481EEB80CB00688761 /* AudioItem.swift */; };
+		FA6E5D8D1F9C2FFF00F37147 /* AudioItemsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3B73491EEB80CB00688761 /* AudioItemsController.swift */; };
+		FA6E5D8E1F9C2FFF00F37147 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3B734A1EEB80CB00688761 /* AudioPlayer.swift */; };
+		FA6E5D8F1F9C2FFF00F37147 /* AudioPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3B734B1EEB80CB00688761 /* AudioPlayerController.swift */; };
+		FA6E5D901F9C2FFF00F37147 /* AudioPlayerUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3B734C1EEB80CB00688761 /* AudioPlayerUI.swift */; };
+		FA6E5D911F9C2FFF00F37147 /* AudioVersionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3B734D1EEB80CB00688761 /* AudioVersionsController.swift */; };
 		FA8E1EB11EFEBFB000120AEF /* AudioPlayer_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA8E1EA81EFEBFB000120AEF /* AudioPlayer_iOS.framework */; };
 		FA8E1EB61EFEBFB000120AEF /* AudioPlayer_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8E1EB51EFEBFB000120AEF /* AudioPlayer_iOSTests.swift */; };
 		FA8E1EB81EFEBFB000120AEF /* AudioPlayer_iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = FA8E1EAA1EFEBFB000120AEF /* AudioPlayer_iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -21,6 +33,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		FA6E5D7F1F9C2FF200F37147 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FA3B73241EEB7FED00688761 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FA6E5D741F9C2FF200F37147;
+			remoteInfo = AudioPlayer_tvOS;
+		};
 		FA8E1EB21EFEBFB000120AEF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FA3B73241EEB7FED00688761 /* Project object */;
@@ -31,7 +50,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		122569479E6FF26C950E1A8E /* Pods-AudioPlayer_tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AudioPlayer_tvOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-AudioPlayer_tvOS/Pods-AudioPlayer_tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		2ACEED3218367135E06B2126 /* Pods-AudioPlayer_tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AudioPlayer_tvOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AudioPlayer_tvOSTests/Pods-AudioPlayer_tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		2DBA1C9018194BDC8260DFE2 /* Example.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Example.swift; path = Example/Sources/AudioPlayer_Example/Example.swift; sourceTree = "<group>"; };
 		4E9EA19C6B409FA3AFBE20A1 /* Pods-AudioPlayer_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AudioPlayer_iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AudioPlayer_iOS/Pods-AudioPlayer_iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		598F2608ABE4D519B65A56AF /* Pods-AudioPlayer_tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AudioPlayer_tvOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AudioPlayer_tvOS/Pods-AudioPlayer_tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		89BB16F096F418E8B3BA62A4 /* Pods-AudioPlayer_tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AudioPlayer_tvOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AudioPlayer_tvOSTests/Pods-AudioPlayer_tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		AD0590F2845CB5B8E471F79E /* Pods_AudioPlayer_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AudioPlayer_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B500518308169F8A79674E22 /* Pods_AudioPlayer_tvOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AudioPlayer_tvOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C747264FE92EF4AA1DD50FAD /* Pods-AudioPlayer_iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AudioPlayer_iOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AudioPlayer_iOSTests/Pods-AudioPlayer_iOSTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -46,6 +70,12 @@
 		FA3B734C1EEB80CB00688761 /* AudioPlayerUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayerUI.swift; sourceTree = "<group>"; };
 		FA3B734D1EEB80CB00688761 /* AudioVersionsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioVersionsController.swift; sourceTree = "<group>"; };
 		FA3B73821EEB871100688761 /* AudioPlayer.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AudioPlayer.podspec; sourceTree = "<group>"; };
+		FA6E5D751F9C2FF200F37147 /* AudioPlayer_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AudioPlayer_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA6E5D771F9C2FF200F37147 /* AudioPlayer_tvOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioPlayer_tvOS.h; sourceTree = "<group>"; };
+		FA6E5D781F9C2FF200F37147 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FA6E5D7D1F9C2FF200F37147 /* AudioPlayer_tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AudioPlayer_tvOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA6E5D821F9C2FF200F37147 /* AudioPlayer_tvOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer_tvOSTests.swift; sourceTree = "<group>"; };
+		FA6E5D841F9C2FF200F37147 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA8E1EA81EFEBFB000120AEF /* AudioPlayer_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AudioPlayer_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA8E1EAA1EFEBFB000120AEF /* AudioPlayer_iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioPlayer_iOS.h; sourceTree = "<group>"; };
 		FA8E1EAB1EFEBFB000120AEF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -55,6 +85,23 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		FA6E5D711F9C2FF200F37147 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				251AD75C3B8867D9B3877F65 /* Pods_AudioPlayer_tvOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA6E5D7A1F9C2FF200F37147 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA6E5D7E1F9C2FF200F37147 /* AudioPlayer_tvOS.framework in Frameworks */,
+				948C23405F7BCA5D0A613BA6 /* Pods_AudioPlayer_tvOSTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FA8E1EA41EFEBFB000120AEF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -93,6 +140,10 @@
 				E1E5C27C708481FE55EA1C14 /* Pods-AudioPlayer_iOS.release.xcconfig */,
 				D69EE93263EF1209BB6CCDA0 /* Pods-AudioPlayer_iOSTests.debug.xcconfig */,
 				C747264FE92EF4AA1DD50FAD /* Pods-AudioPlayer_iOSTests.release.xcconfig */,
+				598F2608ABE4D519B65A56AF /* Pods-AudioPlayer_tvOS.debug.xcconfig */,
+				122569479E6FF26C950E1A8E /* Pods-AudioPlayer_tvOS.release.xcconfig */,
+				2ACEED3218367135E06B2126 /* Pods-AudioPlayer_tvOSTests.debug.xcconfig */,
+				89BB16F096F418E8B3BA62A4 /* Pods-AudioPlayer_tvOSTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -104,9 +155,12 @@
 				FA3B73471EEB807800688761 /* Sources */,
 				FA8E1EA91EFEBFB000120AEF /* AudioPlayer_iOS */,
 				FA8E1EB41EFEBFB000120AEF /* AudioPlayer_iOSTests */,
+				FA6E5D761F9C2FF200F37147 /* AudioPlayer_tvOS */,
+				FA6E5D811F9C2FF200F37147 /* AudioPlayer_tvOSTests */,
 				FA3B73301EEB800500688761 /* Products */,
 				D45055BE7D3D6C9D807C1BD5 /* Pods */,
 				4FDD24E00BEA089FBAD0D20D /* Frameworks */,
+				2DBA1C9018194BDC8260DFE2 /* Example.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -115,6 +169,8 @@
 			children = (
 				FA8E1EA81EFEBFB000120AEF /* AudioPlayer_iOS.framework */,
 				FA8E1EB01EFEBFB000120AEF /* AudioPlayer_iOSTests.xctest */,
+				FA6E5D751F9C2FF200F37147 /* AudioPlayer_tvOS.framework */,
+				FA6E5D7D1F9C2FF200F37147 /* AudioPlayer_tvOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -130,6 +186,24 @@
 				FA3B734D1EEB80CB00688761 /* AudioVersionsController.swift */,
 			);
 			path = Sources;
+			sourceTree = "<group>";
+		};
+		FA6E5D761F9C2FF200F37147 /* AudioPlayer_tvOS */ = {
+			isa = PBXGroup;
+			children = (
+				FA6E5D771F9C2FF200F37147 /* AudioPlayer_tvOS.h */,
+				FA6E5D781F9C2FF200F37147 /* Info.plist */,
+			);
+			path = AudioPlayer_tvOS;
+			sourceTree = "<group>";
+		};
+		FA6E5D811F9C2FF200F37147 /* AudioPlayer_tvOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				FA6E5D821F9C2FF200F37147 /* AudioPlayer_tvOSTests.swift */,
+				FA6E5D841F9C2FF200F37147 /* Info.plist */,
+			);
+			path = AudioPlayer_tvOSTests;
 			sourceTree = "<group>";
 		};
 		FA8E1EA91EFEBFB000120AEF /* AudioPlayer_iOS */ = {
@@ -153,6 +227,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		FA6E5D721F9C2FF200F37147 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA6E5D851F9C2FF200F37147 /* AudioPlayer_tvOS.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FA8E1EA51EFEBFB000120AEF /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -164,6 +246,47 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		FA6E5D741F9C2FF200F37147 /* AudioPlayer_tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FA6E5D8A1F9C2FF200F37147 /* Build configuration list for PBXNativeTarget "AudioPlayer_tvOS" */;
+			buildPhases = (
+				643BEC922569A94FA75BA1FC /* [CP] Check Pods Manifest.lock */,
+				FA6E5D701F9C2FF200F37147 /* Sources */,
+				FA6E5D711F9C2FF200F37147 /* Frameworks */,
+				FA6E5D721F9C2FF200F37147 /* Headers */,
+				FA6E5D731F9C2FF200F37147 /* Resources */,
+				D6F7ED2466AB0408CCFB276A /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AudioPlayer_tvOS;
+			productName = AudioPlayer_tvOS;
+			productReference = FA6E5D751F9C2FF200F37147 /* AudioPlayer_tvOS.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		FA6E5D7C1F9C2FF200F37147 /* AudioPlayer_tvOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FA6E5D8B1F9C2FF200F37147 /* Build configuration list for PBXNativeTarget "AudioPlayer_tvOSTests" */;
+			buildPhases = (
+				3F78EA21629197E2EB271ED7 /* [CP] Check Pods Manifest.lock */,
+				FA6E5D791F9C2FF200F37147 /* Sources */,
+				FA6E5D7A1F9C2FF200F37147 /* Frameworks */,
+				FA6E5D7B1F9C2FF200F37147 /* Resources */,
+				85B442BE6588ABA715AF4BEF /* [CP] Embed Pods Frameworks */,
+				174F8F3E837E143C1BA34AF2 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FA6E5D801F9C2FF200F37147 /* PBXTargetDependency */,
+			);
+			name = AudioPlayer_tvOSTests;
+			productName = AudioPlayer_tvOSTests;
+			productReference = FA6E5D7D1F9C2FF200F37147 /* AudioPlayer_tvOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		FA8E1EA71EFEBFB000120AEF /* AudioPlayer_iOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = FA8E1EB91EFEBFB000120AEF /* Build configuration list for PBXNativeTarget "AudioPlayer_iOS" */;
@@ -211,9 +334,19 @@
 		FA3B73241EEB7FED00688761 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0830;
+				LastSwiftUpdateCheck = 0900;
 				LastUpgradeCheck = 0900;
 				TargetAttributes = {
+					FA6E5D741F9C2FF200F37147 = {
+						CreatedOnToolsVersion = 9.0.1;
+						DevelopmentTeam = Y63DEDERL2;
+						ProvisioningStyle = Automatic;
+					};
+					FA6E5D7C1F9C2FF200F37147 = {
+						CreatedOnToolsVersion = 9.0.1;
+						DevelopmentTeam = Y63DEDERL2;
+						ProvisioningStyle = Automatic;
+					};
 					FA8E1EA71EFEBFB000120AEF = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = Y63DEDERL2;
@@ -242,11 +375,27 @@
 			targets = (
 				FA8E1EA71EFEBFB000120AEF /* AudioPlayer_iOS */,
 				FA8E1EAF1EFEBFB000120AEF /* AudioPlayer_iOSTests */,
+				FA6E5D741F9C2FF200F37147 /* AudioPlayer_tvOS */,
+				FA6E5D7C1F9C2FF200F37147 /* AudioPlayer_tvOSTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		FA6E5D731F9C2FF200F37147 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA6E5D7B1F9C2FF200F37147 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FA8E1EA61EFEBFB000120AEF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -264,6 +413,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		174F8F3E837E143C1BA34AF2 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AudioPlayer_tvOSTests/Pods-AudioPlayer_tvOSTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		1E6CAF1B921E18F628F5AD3E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -282,6 +446,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		3F78EA21629197E2EB271ED7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AudioPlayer_tvOSTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		5349D61BA100A279B9A3A706 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -289,9 +471,9 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-AudioPlayer_iOSTests/Pods-AudioPlayer_iOSTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/ConfigFile/ConfigFile.framework",
-				"${BUILT_PRODUCTS_DIR}/Files/Files.framework",
-				"${BUILT_PRODUCTS_DIR}/PageLoader/PageLoader.framework",
+				"${BUILT_PRODUCTS_DIR}/ConfigFile-iOS/ConfigFile.framework",
+				"${BUILT_PRODUCTS_DIR}/Files-iOS/Files.framework",
+				"${BUILT_PRODUCTS_DIR}/PageLoader-iOS/PageLoader.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -302,6 +484,46 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AudioPlayer_iOSTests/Pods-AudioPlayer_iOSTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		643BEC922569A94FA75BA1FC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AudioPlayer_tvOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		85B442BE6588ABA715AF4BEF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-AudioPlayer_tvOSTests/Pods-AudioPlayer_tvOSTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ConfigFile-tvOS/ConfigFile.framework",
+				"${BUILT_PRODUCTS_DIR}/Files-tvOS/Files.framework",
+				"${BUILT_PRODUCTS_DIR}/PageLoader-tvOS/PageLoader.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ConfigFile.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Files.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PageLoader.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AudioPlayer_tvOSTests/Pods-AudioPlayer_tvOSTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		93F7ED40A89AA3908EB1B492 /* [CP] Copy Pods Resources */ = {
@@ -317,6 +539,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AudioPlayer_iOS/Pods-AudioPlayer_iOS-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D6F7ED2466AB0408CCFB276A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AudioPlayer_tvOS/Pods-AudioPlayer_tvOS-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D7EC41DE4206C7DEAC6362CD /* [CP] Check Pods Manifest.lock */ = {
@@ -355,6 +592,27 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		FA6E5D701F9C2FF200F37147 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA6E5D8C1F9C2FFF00F37147 /* AudioItem.swift in Sources */,
+				FA6E5D8F1F9C2FFF00F37147 /* AudioPlayerController.swift in Sources */,
+				FA6E5D901F9C2FFF00F37147 /* AudioPlayerUI.swift in Sources */,
+				FA6E5D911F9C2FFF00F37147 /* AudioVersionsController.swift in Sources */,
+				FA6E5D8D1F9C2FFF00F37147 /* AudioItemsController.swift in Sources */,
+				FA6E5D8E1F9C2FFF00F37147 /* AudioPlayer.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA6E5D791F9C2FF200F37147 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA6E5D831F9C2FF200F37147 /* AudioPlayer_tvOSTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FA8E1EA31EFEBFB000120AEF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -365,6 +623,7 @@
 				FA8E1EC41EFEBFFB00120AEF /* AudioVersionsController.swift in Sources */,
 				FA8E1EC01EFEBFFB00120AEF /* AudioItemsController.swift in Sources */,
 				FA8E1EC11EFEBFFB00120AEF /* AudioPlayer.swift in Sources */,
+				2DBA1141B8DA86520087840E /* Example.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -379,6 +638,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		FA6E5D801F9C2FF200F37147 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FA6E5D741F9C2FF200F37147 /* AudioPlayer_tvOS */;
+			targetProxy = FA6E5D7F1F9C2FF200F37147 /* PBXContainerItemProxy */;
+		};
 		FA8E1EB31EFEBFB000120AEF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = FA8E1EA71EFEBFB000120AEF /* AudioPlayer_iOS */;
@@ -448,6 +712,188 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
+		FA6E5D861F9C2FF200F37147 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 598F2608ABE4D519B65A56AF /* Pods-AudioPlayer_tvOS.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = Y63DEDERL2;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = AudioPlayer_tvOS/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rubikon.AudioPlayer-tvOS";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 11.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		FA6E5D871F9C2FF200F37147 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 122569479E6FF26C950E1A8E /* Pods-AudioPlayer_tvOS.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = Y63DEDERL2;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = AudioPlayer_tvOS/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rubikon.AudioPlayer-tvOS";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 11.0;
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		FA6E5D881F9C2FF200F37147 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2ACEED3218367135E06B2126 /* Pods-AudioPlayer_tvOSTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = Y63DEDERL2;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = AudioPlayer_tvOSTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rubikon.AudioPlayer-tvOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 11.0;
+			};
+			name = Debug;
+		};
+		FA6E5D891F9C2FF200F37147 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 89BB16F096F418E8B3BA62A4 /* Pods-AudioPlayer_tvOSTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = Y63DEDERL2;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = AudioPlayer_tvOSTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rubikon.AudioPlayer-tvOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 11.0;
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -703,6 +1149,24 @@
 			buildConfigurations = (
 				FA3B73281EEB7FED00688761 /* Debug */,
 				FA3B73291EEB7FED00688761 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FA6E5D8A1F9C2FF200F37147 /* Build configuration list for PBXNativeTarget "AudioPlayer_tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA6E5D861F9C2FF200F37147 /* Debug */,
+				FA6E5D871F9C2FF200F37147 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FA6E5D8B1F9C2FF200F37147 /* Build configuration list for PBXNativeTarget "AudioPlayer_tvOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA6E5D881F9C2FF200F37147 /* Debug */,
+				FA6E5D891F9C2FF200F37147 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

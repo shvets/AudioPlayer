@@ -1,11 +1,11 @@
 #if os(iOS)
 
 import UIKit
-import PageLoader
 
 #endif
 
 import AVFoundation
+import PageLoader
 
 open class AudioVersionsController: UITableViewController {
   public static let SegueIdentifier = "Audio Versions"

@@ -1,10 +1,10 @@
 #if os(iOS)
 
 import UIKit
-import PageLoader
 
 #endif
 
+import PageLoader
 import AVFoundation
 
 open class AudioItemsController: UITableViewController {

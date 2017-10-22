@@ -13,17 +13,17 @@ target 'AudioPlayer_iOS' do
   end
 end
 
-#target 'AudioPlayer_tvOS' do
-#  platform :tvos, '10.10'
+target 'AudioPlayer_tvOS' do
+  platform :tvos, '10.10'
 
-#  use_frameworks!
+  use_frameworks!
 
-#  podspec :path => 'AudioPlayer.podspec'
+  podspec :path => 'AudioPlayer.podspec'
 
-#  target 'AudioPlayer_tvOSTests' do
-#    inherit! :search_paths
-#  end
-#end
+  target 'AudioPlayer_tvOSTests' do
+    inherit! :search_paths
+  end
+end
 
 # target 'AudioPlayer_macOS' do
 #   platform :osx, '10.10'
