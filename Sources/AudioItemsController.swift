@@ -9,8 +9,7 @@ import AVFoundation
 
 open class AudioItemsController: UITableViewController {
   public static let SegueIdentifier = "Audio Items"
-  public class var StoryboardControllerId: String { return "AudioItemsController" }
-
+  public static var StoryboardControllerId = "AudioItemsController"
   open var CellIdentifier: String { return "AudioItemCell" }
 
   public let pageLoader = PageLoader()

@@ -74,9 +74,6 @@ open class AudioPlayer: NSObject {
 
     handleRemoteCenter()
 
-//    savePlayerPositionTimer = Timer.scheduledTimer(timeInterval: 5, target: self,
-//        selector: #selector(self.save), userInfo: nil, repeats: true);
-
     DispatchQueue.main.async {
       self.savePlayerPositionTimer = Timer.scheduledTimer(withTimeInterval: 30, repeats: true) { _ in
         self.save()
