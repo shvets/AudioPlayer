@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   s.tvos.deployment_target = "10.0"
 
   s.source_files = "Sources/**/*.swift"
-  s.resources = "Sources/Assets/**/*.xcassets"
+  #s.resources = "Sources/Assets/**/*.xcassets"
 
   s.dependency 'Files', '~> 1.9.0'
   s.dependency 'ConfigFile', '~> 1.0.0'

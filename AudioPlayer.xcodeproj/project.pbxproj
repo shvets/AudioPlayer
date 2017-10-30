@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		2248DFD34466BDA9705577E2 /* Pods_AudioPlayer_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD0590F2845CB5B8E471F79E /* Pods_AudioPlayer_iOSTests.framework */; };
 		251AD75C3B8867D9B3877F65 /* Pods_AudioPlayer_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5AAAA706A090EBAE4885C75 /* Pods_AudioPlayer_tvOS.framework */; };
-		2DBA1141B8DA86520087840E /* Example.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1C9018194BDC8260DFE2 /* Example.swift */; };
 		61989521CCB1D3A23F67DE83 /* Pods_AudioPlayer_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6649E5051B566FB09E7993B /* Pods_AudioPlayer_iOS.framework */; };
 		948C23405F7BCA5D0A613BA6 /* Pods_AudioPlayer_tvOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B500518308169F8A79674E22 /* Pods_AudioPlayer_tvOSTests.framework */; };
 		FA202A4E1F9CEE8F0018A581 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA202A4D1F9CEE8F0018A581 /* Assets.xcassets */; };
@@ -53,7 +52,6 @@
 /* Begin PBXFileReference section */
 		122569479E6FF26C950E1A8E /* Pods-AudioPlayer_tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AudioPlayer_tvOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-AudioPlayer_tvOS/Pods-AudioPlayer_tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		2ACEED3218367135E06B2126 /* Pods-AudioPlayer_tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AudioPlayer_tvOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AudioPlayer_tvOSTests/Pods-AudioPlayer_tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
-		2DBA1C9018194BDC8260DFE2 /* Example.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Example.swift; path = Example/Sources/AudioPlayer_Example/Example.swift; sourceTree = "<group>"; };
 		4E9EA19C6B409FA3AFBE20A1 /* Pods-AudioPlayer_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AudioPlayer_iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AudioPlayer_iOS/Pods-AudioPlayer_iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		598F2608ABE4D519B65A56AF /* Pods-AudioPlayer_tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AudioPlayer_tvOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AudioPlayer_tvOS/Pods-AudioPlayer_tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		89BB16F096F418E8B3BA62A4 /* Pods-AudioPlayer_tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AudioPlayer_tvOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AudioPlayer_tvOSTests/Pods-AudioPlayer_tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -162,7 +160,6 @@
 				FA3B73301EEB800500688761 /* Products */,
 				D45055BE7D3D6C9D807C1BD5 /* Pods */,
 				4FDD24E00BEA089FBAD0D20D /* Frameworks */,
-				2DBA1C9018194BDC8260DFE2 /* Example.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -627,7 +624,6 @@
 				FA8E1EC41EFEBFFB00120AEF /* AudioVersionsController.swift in Sources */,
 				FA8E1EC01EFEBFFB00120AEF /* AudioItemsController.swift in Sources */,
 				FA8E1EC11EFEBFFB00120AEF /* AudioPlayer.swift in Sources */,
-				2DBA1141B8DA86520087840E /* Example.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
