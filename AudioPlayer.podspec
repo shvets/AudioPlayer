@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "AudioPlayer"
-  s.version      = "1.0.8"
+  s.version      = "1.0.9"
   s.summary      = "Audio Player"
   s.description  = "Audio Player description"
 
@@ -10,9 +10,7 @@ Pod::Spec.new do |s|
   s.source = { :git => "https://github.com/shvets/AudioPlayer.git", :tag => s.version }
 
   s.ios.deployment_target = "10.0"
-  #s.osx.deployment_target = "10.10"
   s.tvos.deployment_target = "10.0"
-  #s.watchos.deployment_target = "2.0"
 
   s.source_files = "Sources/**/*.swift"
   s.resources = "Sources/Assets/**/*.xcassets"
