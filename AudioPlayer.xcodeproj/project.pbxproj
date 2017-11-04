@@ -20,7 +20,6 @@
 		FA6E5D8E1F9C2FFF00F37147 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3B734A1EEB80CB00688761 /* AudioPlayer.swift */; };
 		FA6E5D8F1F9C2FFF00F37147 /* AudioPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3B734B1EEB80CB00688761 /* AudioPlayerController.swift */; };
 		FA6E5D901F9C2FFF00F37147 /* AudioPlayerUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3B734C1EEB80CB00688761 /* AudioPlayerUI.swift */; };
-		FA6E5D911F9C2FFF00F37147 /* AudioVersionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3B734D1EEB80CB00688761 /* AudioVersionsController.swift */; };
 		FA8E1EB11EFEBFB000120AEF /* AudioPlayer_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA8E1EA81EFEBFB000120AEF /* AudioPlayer_iOS.framework */; };
 		FA8E1EB61EFEBFB000120AEF /* AudioPlayer_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8E1EB51EFEBFB000120AEF /* AudioPlayer_iOSTests.swift */; };
 		FA8E1EB81EFEBFB000120AEF /* AudioPlayer_iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = FA8E1EAA1EFEBFB000120AEF /* AudioPlayer_iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -29,7 +28,6 @@
 		FA8E1EC11EFEBFFB00120AEF /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3B734A1EEB80CB00688761 /* AudioPlayer.swift */; };
 		FA8E1EC21EFEBFFB00120AEF /* AudioPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3B734B1EEB80CB00688761 /* AudioPlayerController.swift */; };
 		FA8E1EC31EFEBFFB00120AEF /* AudioPlayerUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3B734C1EEB80CB00688761 /* AudioPlayerUI.swift */; };
-		FA8E1EC41EFEBFFB00120AEF /* AudioVersionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3B734D1EEB80CB00688761 /* AudioVersionsController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,7 +66,6 @@
 		FA3B734A1EEB80CB00688761 /* AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		FA3B734B1EEB80CB00688761 /* AudioPlayerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayerController.swift; sourceTree = "<group>"; };
 		FA3B734C1EEB80CB00688761 /* AudioPlayerUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayerUI.swift; sourceTree = "<group>"; };
-		FA3B734D1EEB80CB00688761 /* AudioVersionsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioVersionsController.swift; sourceTree = "<group>"; };
 		FA3B73821EEB871100688761 /* AudioPlayer.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AudioPlayer.podspec; sourceTree = "<group>"; };
 		FA6E5D751F9C2FF200F37147 /* AudioPlayer_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AudioPlayer_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA6E5D771F9C2FF200F37147 /* AudioPlayer_tvOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioPlayer_tvOS.h; sourceTree = "<group>"; };
@@ -182,7 +179,6 @@
 				FA3B734A1EEB80CB00688761 /* AudioPlayer.swift */,
 				FA3B734B1EEB80CB00688761 /* AudioPlayerController.swift */,
 				FA3B734C1EEB80CB00688761 /* AudioPlayerUI.swift */,
-				FA3B734D1EEB80CB00688761 /* AudioVersionsController.swift */,
 				FA202A4D1F9CEE8F0018A581 /* Assets.xcassets */,
 			);
 			path = Sources;
@@ -600,7 +596,6 @@
 				FA6E5D8C1F9C2FFF00F37147 /* AudioItem.swift in Sources */,
 				FA6E5D8F1F9C2FFF00F37147 /* AudioPlayerController.swift in Sources */,
 				FA6E5D901F9C2FFF00F37147 /* AudioPlayerUI.swift in Sources */,
-				FA6E5D911F9C2FFF00F37147 /* AudioVersionsController.swift in Sources */,
 				FA6E5D8D1F9C2FFF00F37147 /* AudioItemsController.swift in Sources */,
 				FA6E5D8E1F9C2FFF00F37147 /* AudioPlayer.swift in Sources */,
 			);
@@ -621,7 +616,6 @@
 				FA8E1EBF1EFEBFFB00120AEF /* AudioItem.swift in Sources */,
 				FA8E1EC21EFEBFFB00120AEF /* AudioPlayerController.swift in Sources */,
 				FA8E1EC31EFEBFFB00120AEF /* AudioPlayerUI.swift in Sources */,
-				FA8E1EC41EFEBFFB00120AEF /* AudioVersionsController.swift in Sources */,
 				FA8E1EC01EFEBFFB00120AEF /* AudioItemsController.swift in Sources */,
 				FA8E1EC11EFEBFFB00120AEF /* AudioPlayer.swift in Sources */,
 			);
