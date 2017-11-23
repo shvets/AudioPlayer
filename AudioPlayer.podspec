@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "AudioPlayer"
-  s.version      = "1.0.9"
+  s.version      = "1.0.10"
   s.summary      = "Audio Player"
   s.description  = "Audio Player description"
 
@@ -15,8 +15,8 @@ Pod::Spec.new do |s|
   s.source_files = "Sources/**/*.swift"
   #s.resources = "Sources/Assets/**/*.xcassets"
 
-  s.dependency 'Files', '~> 1.9.0'
-  s.dependency 'ConfigFile', '~> 1.0.0'
+  s.dependency 'Files', '~> 2.0.1'
+  s.dependency 'ConfigFile', '~> 1.1.0'
   s.dependency 'PageLoader', '~> 1.0.0'
 
   s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4' }
