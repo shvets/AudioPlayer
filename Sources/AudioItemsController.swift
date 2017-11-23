@@ -19,6 +19,8 @@ open class AudioItemsController: UITableViewController {
   public var id: String?
   public var version: Int = 0
 
+  public var loadAudioItems: (() throws -> [Any])?
+
   public var items: [AudioItem] = []
   
 #if os(iOS)
@@ -40,14 +42,14 @@ open class AudioItemsController: UITableViewController {
 
     pageLoader.spinner = PlainSpinner(activityIndicatorView)
 
-    func onLoad() {}
-
-    pageLoader.loadData(onLoad: onLoad) { result in
-      if let items = result as? [AudioItem] {
-        self.items = items
+    if let onLoad = loadAudioItems {
+      pageLoader.loadData(onLoad: onLoad) { result in
+        if let items = result as? [AudioItem] {
+          self.items = items
+        }
+        
+        self.tableView?.reloadData()
       }
-
-      self.tableView?.reloadData()
     }
   }
 
