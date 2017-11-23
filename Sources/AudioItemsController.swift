@@ -40,7 +40,9 @@ open class AudioItemsController: UITableViewController {
 
     pageLoader.spinner = PlainSpinner(activityIndicatorView)
 
-    pageLoader.loadData { result in
+    func onLoad() {}
+
+    pageLoader.loadData(onLoad: onLoad) { result in
       if let items = result as? [AudioItem] {
         self.items = items
       }
