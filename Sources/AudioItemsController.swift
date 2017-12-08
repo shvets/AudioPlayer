@@ -144,6 +144,8 @@ open class AudioItemsController: UITableViewController {
             destination.coverImageUrl = thumb ?? ""
             destination.items = items
             destination.selectedBookId = id ?? ""
+            destination.selectedBookName = name ?? ""
+            destination.selectedBookThumb = thumb ?? ""
 
             if let cell = sender as? UITableViewCell,
                let indexPath = tableView?.indexPath(for: cell) {

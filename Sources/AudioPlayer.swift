@@ -30,7 +30,7 @@ open class AudioPlayer: NSObject {
   let notificationCenter = NotificationCenter.default
 
   static let audioPlayerSettingsFileName = NSHomeDirectory() + "/Library/Caches/audio-player-settings.json"
-  lazy var audioPlayerSettings = StringConfigFile(AudioPlayer.audioPlayerSettingsFileName)
+  public lazy var audioPlayerSettings = StringConfigFile(AudioPlayer.audioPlayerSettingsFileName)
 
   let audioSession = AVAudioSession.sharedInstance()
 
@@ -46,6 +46,9 @@ open class AudioPlayer: NSObject {
   var savePlayerPositionTimer: Timer?
 
   public var currentBookId: String = ""
+  public var currentBookName: String = ""
+  public var currentBookThumb: String = ""
+  
   public var currentTrackIndex: Int = -1
   public var currentSongPosition: Float = -1
   public var items: [AudioItem] = []
@@ -54,6 +57,8 @@ open class AudioPlayer: NSObject {
   var authorName: String?
   var bookName: String?
   var selectedBookId: String?
+  var selectedBookName: String?
+  var selectedBookThumb: String?
   var selectedItemId: Int?
 
   weak var ui: AudioPlayerUI?
@@ -207,6 +212,14 @@ open class AudioPlayer: NSObject {
       currentBookId = value
     }
 
+    if let value = audioPlayerSettings.items["currentBookName"] {
+      currentBookName = value
+    }
+
+    if let value = audioPlayerSettings.items["currentBookThumb"] {
+      currentBookThumb = value
+    }
+
     if let value = audioPlayerSettings.items["currentTrackIndex"] {
       currentTrackIndex = (value as AnyObject).integerValue
     }
@@ -218,6 +231,8 @@ open class AudioPlayer: NSObject {
 
   func save() {
     audioPlayerSettings.add(key: "currentBookId", value: currentBookId)
+    audioPlayerSettings.add(key: "currentBookName", value: currentBookName)
+    audioPlayerSettings.add(key: "currentBookThumb", value: currentBookThumb)
     audioPlayerSettings.add(key: "currentTrackIndex", value: String(currentTrackIndex))
     audioPlayerSettings.add(key: "currentSongPosition", value: String(currentSongPosition))
 
@@ -258,6 +273,8 @@ extension AudioPlayer {
 
     if isAnotherBook {
       currentBookId = selectedBookId ?? ""
+      currentBookName = selectedBookName ?? ""
+      currentBookThumb = selectedBookThumb ?? ""
     }
 
     currentTrackIndex = selectedItemId ?? -1

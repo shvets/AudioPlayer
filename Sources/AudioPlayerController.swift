@@ -14,6 +14,8 @@ open class AudioPlayerController: UIViewController, AudioPlayerUI {
   public var coverImageUrl: String!
   public var items: [AudioItem]!
   public var selectedBookId: String!
+  public var selectedBookName: String!
+  public var selectedBookThumb: String!
   public var selectedItemId: Int!
 
 #if os(iOS)
@@ -50,6 +52,8 @@ open class AudioPlayerController: UIViewController, AudioPlayerUI {
 
     audioPlayer.items = items
     audioPlayer.selectedBookId = selectedBookId
+    audioPlayer.selectedBookName = selectedBookName
+    audioPlayer.selectedBookThumb = selectedBookThumb
     audioPlayer.selectedItemId = selectedItemId
 
     audioPlayer.setupPlayer()
