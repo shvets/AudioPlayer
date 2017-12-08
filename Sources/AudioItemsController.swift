@@ -14,9 +14,12 @@ open class AudioItemsController: UITableViewController {
 
   public let pageLoader = PageLoader()
 
+  var audioPlayer: AudioPlayer!
+
   public var name: String?
   public var thumb: String?
   public var id: String?
+  public var audioPlayerProperties: String? = ""
   public var version: Int = 0
 
   public var loadAudioItems: (() throws -> [Any])?
@@ -32,6 +35,10 @@ open class AudioItemsController: UITableViewController {
   override open func viewDidLoad() {
     super.viewDidLoad()
 
+    audioPlayer = AudioPlayer(audioPlayerProperties!)
+    
+    audioPlayer.loadPlayer()
+    
     title = name
 
     tableView?.backgroundView = activityIndicatorView
@@ -55,7 +62,7 @@ open class AudioItemsController: UITableViewController {
 
   func navigateToSelectedRow() {
     if loaded {
-      let currentTrackIndex = AudioPlayer.shared.currentTrackIndex
+      let currentTrackIndex = audioPlayer.currentTrackIndex
 
       if isSameBook() && currentTrackIndex != -1 {
         let indexPath = IndexPath(row: currentTrackIndex, section: 0)
@@ -74,12 +81,12 @@ open class AudioItemsController: UITableViewController {
     guard let id = id else {
       return false
     }
-
-    return id == AudioPlayer.shared.currentBookId
+    
+    return id == audioPlayer.currentBookId
   }
 
   func isSameTrack(_ row: Int) -> Bool {
-    let currentTrackIndex = AudioPlayer.shared.currentTrackIndex
+    let currentTrackIndex = audioPlayer.currentTrackIndex
 
     return currentTrackIndex != -1 && row == currentTrackIndex
   }
@@ -146,6 +153,7 @@ open class AudioItemsController: UITableViewController {
             destination.selectedBookId = id ?? ""
             destination.selectedBookName = name ?? ""
             destination.selectedBookThumb = thumb ?? ""
+            destination.audioPlayerProperties = audioPlayerProperties ?? ""
 
             if let cell = sender as? UITableViewCell,
                let indexPath = tableView?.indexPath(for: cell) {

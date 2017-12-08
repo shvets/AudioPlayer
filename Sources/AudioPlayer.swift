@@ -12,14 +12,6 @@ open class AudioPlayer: NSObject {
 //, AVAssetResourceLoaderDelegate {
 
 #if os(iOS)
-  public static let shared: AudioPlayer = {
-    let player = AudioPlayer()
-
-    player.load()
-
-    return player
-  }()
-
   public enum Status: Int {
     case ready = 1
     case playing
@@ -29,8 +21,7 @@ open class AudioPlayer: NSObject {
 
   let notificationCenter = NotificationCenter.default
 
-  static let audioPlayerSettingsFileName = NSHomeDirectory() + "/Library/Caches/audio-player-settings.json"
-  public lazy var audioPlayerSettings = StringConfigFile(AudioPlayer.audioPlayerSettingsFileName)
+  public var audioPlayerSettings: StringConfigFile?
 
   let audioSession = AVAudioSession.sharedInstance()
 
@@ -63,7 +54,11 @@ open class AudioPlayer: NSObject {
 
   weak var ui: AudioPlayerUI?
 
-  override init() {
+  public init(_ fileName: String) {
+    let audioPlayerSettingsFileName = NSHomeDirectory() + "/Library/Caches/" + fileName
+
+    audioPlayerSettings = StringConfigFile(audioPlayerSettingsFileName)
+
     UIApplication.shared.beginReceivingRemoteControlEvents() // begin receiving remote events
 
     do {
@@ -200,47 +195,51 @@ open class AudioPlayer: NSObject {
     backgroundIdentifier = UIBackgroundTaskInvalid
   }
 
-  func load() {
-    do {
-      try audioPlayerSettings.load()
-    }
-    catch let error {
-      print("Error loading config file: \(error)")
-    }
+  open func loadPlayer() {
+    if let settings = audioPlayerSettings {
+      do {
+        try settings.load()
+      }
+      catch let error {
+        print("Error loading config file: \(error)")
+      }
 
-    if let value = audioPlayerSettings.items["currentBookId"] {
-      currentBookId = value
-    }
+      if let value = settings.items["currentBookId"] {
+        currentBookId = value
+      }
 
-    if let value = audioPlayerSettings.items["currentBookName"] {
-      currentBookName = value
-    }
+      if let value = settings.items["currentBookName"] {
+        currentBookName = value
+      }
 
-    if let value = audioPlayerSettings.items["currentBookThumb"] {
-      currentBookThumb = value
-    }
+      if let value = settings.items["currentBookThumb"] {
+        currentBookThumb = value
+      }
 
-    if let value = audioPlayerSettings.items["currentTrackIndex"] {
-      currentTrackIndex = (value as AnyObject).integerValue
-    }
+      if let value = settings.items["currentTrackIndex"] {
+        currentTrackIndex = (value as AnyObject).integerValue
+      }
 
-    if let value = audioPlayerSettings.items["currentSongPosition"] {
-      currentSongPosition = (value as AnyObject).floatValue
+      if let value = settings.items["currentSongPosition"] {
+        currentSongPosition = (value as AnyObject).floatValue
+      }
     }
   }
 
   func save() {
-    audioPlayerSettings.add(key: "currentBookId", value: currentBookId)
-    audioPlayerSettings.add(key: "currentBookName", value: currentBookName)
-    audioPlayerSettings.add(key: "currentBookThumb", value: currentBookThumb)
-    audioPlayerSettings.add(key: "currentTrackIndex", value: String(currentTrackIndex))
-    audioPlayerSettings.add(key: "currentSongPosition", value: String(currentSongPosition))
+    if let settings = audioPlayerSettings {
+      settings.add(key: "currentBookId", value: currentBookId)
+      settings.add(key: "currentBookName", value: currentBookName)
+      settings.add(key: "currentBookThumb", value: currentBookThumb)
+      settings.add(key: "currentTrackIndex", value: String(currentTrackIndex))
+      settings.add(key: "currentSongPosition", value: String(currentSongPosition))
 
-    do {
-      try audioPlayerSettings.save()
-    }
-    catch let error {
-      print("Error saving config file: \(error)")
+      do {
+        try settings.save()
+      }
+      catch let error {
+        print("Error saving config file: \(error)")
+      }
     }
   }
 
