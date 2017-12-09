@@ -12,6 +12,38 @@ open class AudioPlayer: NSObject {
 //, AVAssetResourceLoaderDelegate {
 
 #if os(iOS)
+  public static var players: [AudioPlayer] = []
+
+  public static func addPlayer(_ player: AudioPlayer) {
+    players.append(player)
+  }
+
+  public static func getAudioPlayer(_ propertiesFileName: String) -> AudioPlayer {
+    var player: AudioPlayer
+
+    let players = AudioPlayer.players
+
+    for player in players {
+      if player.propertiesFileName != propertiesFileName &&
+        player.player.timeControlStatus == .playing {
+        player.pause()
+      }
+    }
+
+    if let index = players.index(where: { $0.propertiesFileName == propertiesFileName }) {
+      player = players[index]
+    }
+    else {
+      player = AudioPlayer(propertiesFileName)
+
+      AudioPlayer.addPlayer(player)
+    }
+
+    player.loadPlayer()
+
+    return player
+  }
+
   public enum Status: Int {
     case ready = 1
     case playing
@@ -54,8 +86,12 @@ open class AudioPlayer: NSObject {
 
   weak var ui: AudioPlayerUI?
 
-  public init(_ fileName: String) {
-    let audioPlayerSettingsFileName = NSHomeDirectory() + "/Library/Caches/" + fileName
+  var propertiesFileName: String!
+
+  public init(_ propertiesFileName: String) {
+    self.propertiesFileName = propertiesFileName
+
+    let audioPlayerSettingsFileName = NSHomeDirectory() + "/Library/Caches/" + propertiesFileName
 
     audioPlayerSettings = StringConfigFile(audioPlayerSettingsFileName)
 

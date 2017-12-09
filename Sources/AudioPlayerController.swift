@@ -17,7 +17,6 @@ open class AudioPlayerController: UIViewController, AudioPlayerUI {
   public var selectedBookName: String!
   public var selectedBookThumb: String!
   public var selectedItemId: Int!
-  public var audioPlayerProperties: String!
 
 #if os(iOS)
 
@@ -36,10 +35,6 @@ open class AudioPlayerController: UIViewController, AudioPlayerUI {
 
   override open func viewDidLoad() {
     super.viewDidLoad()
-
-    audioPlayer = AudioPlayer(audioPlayerProperties)
-
-    audioPlayer.loadPlayer()
 
     title = parentName
 

@@ -14,12 +14,11 @@ open class AudioItemsController: UITableViewController {
 
   public let pageLoader = PageLoader()
 
-  var audioPlayer: AudioPlayer!
+  public var audioPlayer: AudioPlayer!
 
   public var name: String?
   public var thumb: String?
   public var id: String?
-  public var audioPlayerProperties: String? = ""
   public var version: Int = 0
 
   public var loadAudioItems: (() throws -> [Any])?
@@ -34,10 +33,6 @@ open class AudioItemsController: UITableViewController {
 
   override open func viewDidLoad() {
     super.viewDidLoad()
-
-    audioPlayer = AudioPlayer(audioPlayerProperties!)
-    
-    audioPlayer.loadPlayer()
     
     title = name
 
@@ -153,7 +148,7 @@ open class AudioItemsController: UITableViewController {
             destination.selectedBookId = id ?? ""
             destination.selectedBookName = name ?? ""
             destination.selectedBookThumb = thumb ?? ""
-            destination.audioPlayerProperties = audioPlayerProperties ?? ""
+            destination.audioPlayer = audioPlayer
 
             if let cell = sender as? UITableViewCell,
                let indexPath = tableView?.indexPath(for: cell) {
