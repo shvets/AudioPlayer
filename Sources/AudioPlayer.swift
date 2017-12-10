@@ -428,6 +428,8 @@ extension AudioPlayer {
     else {
       print("Cannot build player")
 
+      pause()
+
       let alert = UIAlertController(title: "Error", message: "Cannot build player", preferredStyle: .alert);
 
       let okAction = UIAlertAction(title: "OK", style: .default)
