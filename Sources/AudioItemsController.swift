@@ -66,6 +66,7 @@ open class AudioItemsController: UITableViewController {
       }
     }
   }
+
   override open func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
 
