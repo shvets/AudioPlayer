@@ -67,7 +67,8 @@ open class AudioPlayer: NSObject {
   var status = Status.ready
 
   var savePlayerPositionTimer: Timer?
-
+  var reconnectTimer: Timer?
+  
   public var currentBookId: String = ""
   public var currentBookName: String = ""
   public var currentBookThumb: String = ""
@@ -412,7 +413,7 @@ extension AudioPlayer {
 
     return true
   }
-
+  
   func play(newPlayer: Bool=false, songPosition: Float=0) {
     if createNewPlayer(newPlayer: newPlayer, songPosition: songPosition) {
       print("play")
@@ -432,7 +433,11 @@ extension AudioPlayer {
 
       let alert = UIAlertController(title: "Error", message: "Cannot build player", preferredStyle: .alert);
 
-      let okAction = UIAlertAction(title: "OK", style: .default)
+      let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+        //let reconnectTimer = Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { _ in
+          self.play()
+        //}
+      }
 
       alert.addAction(okAction)
 
@@ -441,6 +446,20 @@ extension AudioPlayer {
       }
     }
   }
+  
+//  func createReconnectTimer() {
+//    DispatchQueue.main.async {
+//      self.reconnectTimer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in
+//        self.play()
+//      }
+//    }
+//  }
+//
+//  func destroyReconnectTimer() {
+//    reconnectTimer?.invalidate()
+//
+//    reconnectTimer = nil
+//  }
 
   func getTopViewController(controller: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
     if let navigationController = controller as? UINavigationController {
