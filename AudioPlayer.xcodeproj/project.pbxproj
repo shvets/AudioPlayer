@@ -251,7 +251,6 @@
 				FA6E5D711F9C2FF200F37147 /* Frameworks */,
 				FA6E5D721F9C2FF200F37147 /* Headers */,
 				FA6E5D731F9C2FF200F37147 /* Resources */,
-				D6F7ED2466AB0408CCFB276A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -271,7 +270,6 @@
 				FA6E5D7A1F9C2FF200F37147 /* Frameworks */,
 				FA6E5D7B1F9C2FF200F37147 /* Resources */,
 				85B442BE6588ABA715AF4BEF /* [CP] Embed Pods Frameworks */,
-				174F8F3E837E143C1BA34AF2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -292,7 +290,6 @@
 				FA8E1EA41EFEBFB000120AEF /* Frameworks */,
 				FA8E1EA51EFEBFB000120AEF /* Headers */,
 				FA8E1EA61EFEBFB000120AEF /* Resources */,
-				93F7ED40A89AA3908EB1B492 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -312,7 +309,6 @@
 				FA8E1EAD1EFEBFB000120AEF /* Frameworks */,
 				FA8E1EAE1EFEBFB000120AEF /* Resources */,
 				5349D61BA100A279B9A3A706 /* [CP] Embed Pods Frameworks */,
-				FBF6B99E68A1F3DB586B1FDD /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -410,21 +406,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		174F8F3E837E143C1BA34AF2 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AudioPlayer_tvOSTests/Pods-AudioPlayer_tvOSTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		1E6CAF1B921E18F628F5AD3E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -523,36 +504,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AudioPlayer_tvOSTests/Pods-AudioPlayer_tvOSTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		93F7ED40A89AA3908EB1B492 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AudioPlayer_iOS/Pods-AudioPlayer_iOS-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D6F7ED2466AB0408CCFB276A /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AudioPlayer_tvOS/Pods-AudioPlayer_tvOS-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		D7EC41DE4206C7DEAC6362CD /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -569,21 +520,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FBF6B99E68A1F3DB586B1FDD /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AudioPlayer_iOSTests/Pods-AudioPlayer_iOSTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
