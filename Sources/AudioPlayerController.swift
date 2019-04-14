@@ -39,7 +39,7 @@ open class AudioPlayerController: UIViewController, AudioPlayerUI {
     title = parentName
 
     playbackSlider.tintColor = UIColor.green
-    playbackSlider.setThumbImage(UIImage(named: "sliderThumb"), for: UIControlState())
+    playbackSlider.setThumbImage(UIImage(named: "sliderThumb"), for: UIControl.State())
 
     audioPlayer.ui = self
 

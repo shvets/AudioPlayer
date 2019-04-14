@@ -30,7 +30,7 @@ open class AudioPlayer: NSObject {
       }
     }
 
-    if let index = players.index(where: { $0.propertiesFileName == propertiesFileName }) {
+    if let index = players.firstIndex(where: { $0.propertiesFileName == propertiesFileName }) {
       player = players[index]
     }
     else {
@@ -68,11 +68,11 @@ open class AudioPlayer: NSObject {
 
   var savePlayerPositionTimer: Timer?
   var reconnectTimer: Timer?
-  
+
   public var currentBookId: String = ""
   public var currentBookName: String = ""
   public var currentBookThumb: String = ""
-  
+
   public var currentTrackIndex: Int = -1
   public var currentSongPosition: Float = -1
   public var items: [AudioItem] = []
@@ -99,8 +99,8 @@ open class AudioPlayer: NSObject {
     UIApplication.shared.beginReceivingRemoteControlEvents() // begin receiving remote events
 
     do {
-      try audioSession.setCategory(AVAudioSessionCategoryPlayback)
-      try audioSession.setMode(AVAudioSessionModeDefault)
+      try audioSession.setCategory(AVAudioSession.Category.playback)
+      try audioSession.setMode(AVAudioSession.Mode.default)
       try audioSession.setActive(true)
     }
     catch {
@@ -147,7 +147,7 @@ open class AudioPlayer: NSObject {
 
     return playerItem
   }
-  
+
   func setCoverImage(urlPath: String) {
     if let url = NSURL(string: urlPath),
        let data = NSData(contentsOf: url as URL) {
@@ -156,7 +156,7 @@ open class AudioPlayer: NSObject {
   }
 
   func seek(toSeconds seconds: Int) {
-    player.seek(to: CMTimeMake(Int64(seconds), 1))
+    player.seek(to: CMTimeMake(value: Int64(seconds), timescale: 1))
   }
 
   func changeVolume(_ volume: Float) {
@@ -198,7 +198,7 @@ open class AudioPlayer: NSObject {
 
   func startProgressTimer() {
     if player.currentItem?.duration.isValid == true {
-      let timeInterval: CMTime = CMTimeMakeWithSeconds(1.0, 10)
+      let timeInterval: CMTime = CMTimeMakeWithSeconds(1.0, preferredTimescale: 10)
 
       timeObserver = player.addPeriodicTimeObserver(forInterval: timeInterval,
         queue: DispatchQueue.main) { [unowned self] (_: CMTime) -> Void in
@@ -218,18 +218,18 @@ open class AudioPlayer: NSObject {
 
   // MARK: Background task
 
-  var backgroundIdentifier = UIBackgroundTaskInvalid
+  var backgroundIdentifier = UIBackgroundTaskIdentifier.invalid
 
   func startBackgroundTask() {
     backgroundIdentifier = UIApplication.shared.beginBackgroundTask (expirationHandler: { () -> Void in
       UIApplication.shared.endBackgroundTask(self.backgroundIdentifier)
-      self.backgroundIdentifier = UIBackgroundTaskInvalid
+      self.backgroundIdentifier = UIBackgroundTaskIdentifier.invalid
     })
   }
 
   func stopBackgroundTask() {
     UIApplication.shared.endBackgroundTask(backgroundIdentifier)
-    backgroundIdentifier = UIBackgroundTaskInvalid
+    backgroundIdentifier = UIBackgroundTaskIdentifier.invalid
   }
 
   open func loadPlayer() {
@@ -391,7 +391,7 @@ extension AudioPlayer {
                 name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: nil)
 
               self.notificationCenter.addObserver(self, selector: #selector(self.handleAVAudioSessionInterruption),
-                name: NSNotification.Name.AVAudioSessionInterruption, object: AVAudioSession.sharedInstance())
+                                                  name: AVAudioSession.interruptionNotification, object: AVAudioSession.sharedInstance())
             }
 
             let seconds = self.getPlayerPosition(songPosition)
@@ -413,7 +413,7 @@ extension AudioPlayer {
 
     return true
   }
-  
+
   func play(newPlayer: Bool=false, songPosition: Float=0) {
     if createNewPlayer(newPlayer: newPlayer, songPosition: songPosition) {
       print("play")
@@ -446,7 +446,7 @@ extension AudioPlayer {
       }
     }
   }
-  
+
 //  func createReconnectTimer() {
 //    DispatchQueue.main.async {
 //      self.reconnectTimer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in
@@ -584,7 +584,7 @@ extension AudioPlayer {
     if let currentItem = self.player.currentItem {
       notificationCenter.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: currentItem)
       notificationCenter.removeObserver(self, name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: nil)
-      notificationCenter.removeObserver(self, name: NSNotification.Name.AVAudioSessionInterruption, object: AVAudioSession.sharedInstance())
+//      notificationCenter.removeObserver(self, name: NSNotification.Name.AVAudioSession.interruptionNotification, object: AVAudioSession.sharedInstance())
     }
 
     save()
@@ -613,7 +613,7 @@ extension AudioPlayer {
     guard let userInfo = notification.userInfo as? [String: AnyObject] else { return }
 
     guard let rawInterruptionType = userInfo[AVAudioSessionInterruptionTypeKey] as? NSNumber else { return }
-    guard let interruptionType = AVAudioSessionInterruptionType(rawValue: rawInterruptionType.uintValue) else { return }
+    guard let interruptionType = AVAudioSession.InterruptionType(rawValue: rawInterruptionType.uintValue) else { return }
 
     switch interruptionType {
       case .began: //interruption started
@@ -621,8 +621,8 @@ extension AudioPlayer {
 
       case .ended: //interruption ended
         if let rawInterruptionOption = userInfo[AVAudioSessionInterruptionOptionKey] as? NSNumber {
-          let interruptionOption = AVAudioSessionInterruptionOptions(rawValue: rawInterruptionOption.uintValue)
-          if interruptionOption == AVAudioSessionInterruptionOptions.shouldResume {
+          let interruptionOption = AVAudioSession.InterruptionOptions(rawValue: rawInterruptionOption.uintValue)
+          if interruptionOption == AVAudioSession.InterruptionOptions.shouldResume {
             self.togglePlayPause()
           }
         }

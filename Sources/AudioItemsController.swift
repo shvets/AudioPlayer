@@ -27,7 +27,7 @@ open class AudioItemsController: UITableViewController {
   
 #if os(iOS)
 
-  public let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+  public let activityIndicatorView = UIActivityIndicatorView(style: .gray)
 
   var loaded = false
 
