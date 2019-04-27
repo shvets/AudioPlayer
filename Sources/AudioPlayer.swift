@@ -503,6 +503,9 @@ extension AudioPlayer {
 
       case .paused:
         play()
+
+      @unknown default:
+        fatalError()
     }
   }
 
@@ -626,6 +629,8 @@ extension AudioPlayer {
             self.togglePlayPause()
           }
         }
+      @unknown default:
+        fatalError()
     }
   }
 
