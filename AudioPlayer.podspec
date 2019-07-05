@@ -1,8 +1,8 @@
-swift_version = File.new('.swift-version').read
+#swift_version = File.new('.swift-version').read
 
 Pod::Spec.new do |s|
   s.name         = "AudioPlayer"
-  s.version      = "1.0.13"
+  s.version      = "1.0.14"
   s.summary      = "Audio Player"
   s.description  = "Audio Player description"
 
@@ -23,7 +23,9 @@ Pod::Spec.new do |s|
 #  s.dependency 'Files', '~> 2.0.1'
 #  s.dependency 'ConfigFile', '~> 1.1.0'
   s.dependency 'PageLoader', '~> 1.0.0'
-  s.dependency 'SimpleHttpClient', '~> 1.0.0'
+  s.dependency 'SimpleHttpClient', '~> 1.0.2'
 
-  s.pod_target_xcconfig = { 'SWIFT_VERSION' => swift_version }
+  #s.pod_target_xcconfig = { 'SWIFT_VERSION' => swift_version }
+  s.pod_target_xcconfig = { 'SWIFT_VERSION' => '5.0' }
+  s.swift_versions = '5.0'
 end

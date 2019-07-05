@@ -1,26 +1,29 @@
 PODS:
-  - ConfigFile (1.1.0):
-    - Files (~> 2.0.0)
+  - Codextended (0.3.0)
   - Files (2.0.1)
   - PageLoader (1.0.11)
+  - SimpleHttpClient (1.0.2):
+    - Codextended (~> 0.3.0)
+    - Files (~> 2.0.1)
 
 DEPENDENCIES:
-  - ConfigFile (~> 1.1.0)
-  - Files (~> 2.0.1)
   - PageLoader (~> 1.0.0)
+  - SimpleHttpClient (~> 1.0.2)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - Codextended
     - Files
   https://github.com/shvets/Specs.git:
-    - ConfigFile
     - PageLoader
+    - SimpleHttpClient
 
 SPEC CHECKSUMS:
-  ConfigFile: 80f510c5f83db891b3cfd69ed897366c829494ae
+  Codextended: f384271b8694376ad766ddbf2a011efbfdcee905
   Files: 2a80d8a2fafef38a7a590ef24634a829157e7305
   PageLoader: 16731ab638f3907fb9a6d45a2865e7724e0a74a7
+  SimpleHttpClient: 1766e6f5aedd3a10f2f6e1f4dd18237eed3b68ae
 
-PODFILE CHECKSUM: b213a6f5402b4aaecd5bea97135687c5250d87d8
+PODFILE CHECKSUM: f235fc9f793fa2d71577b130ac95ef4503ff554e
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.7.3

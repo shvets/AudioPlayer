@@ -2,8 +2,8 @@ source 'https://github.com/CocoaPods/Specs.git'
 source 'https://github.com/shvets/Specs.git'
 
 def pods
-  pod 'SimpleHttpClient', path: '../SimpleHttpClient'
-  pod 'PageLoader', path: '../PageLoader'
+  #pod 'SimpleHttpClient', path: '../SimpleHttpClient'
+  #pod 'PageLoader', path: '../PageLoader'
 #  pod 'ConfigFile', path: '../ConfigFile'
 end
 

@@ -236,7 +236,11 @@ open class AudioPlayer: NSObject {
   open func loadPlayer() {
     if let settings = audioPlayerSettings {
       do {
-        try settings.read()
+        if let items = (try Await.await { handler in
+          settings.read(handler)
+        }) {
+          settings.items = items
+        }
       }
       catch let error {
         print("Error loading config file: \(error)")
@@ -273,7 +277,9 @@ open class AudioPlayer: NSObject {
       settings.add(key: "currentSongPosition", value: String(currentSongPosition))
 
       do {
-        try settings.write()
+        try Await.await { handler in
+          try self.audioPlayerSettings!.write(handler)
+        }
       }
       catch let error {
         print("Error saving config file: \(error)")
@@ -419,7 +425,7 @@ extension AudioPlayer {
     if createNewPlayer(newPlayer: newPlayer, songPosition: songPosition) {
       print("play")
 
-      if self.reconnectTimer {
+      if (self.reconnectTimer != nil) {
         destroyReconnectTimer()
       }
 
@@ -437,7 +443,7 @@ extension AudioPlayer {
 
       pause()
 
-      if !self.reconnectTimer {
+      if !(self.reconnectTimer != nil) {
         createReconnectTimer()
       }
 
