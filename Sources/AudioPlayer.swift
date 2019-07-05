@@ -1,6 +1,7 @@
 import AVFoundation
 import UIKit
-import ConfigFile
+//import ConfigFile
+import SimpleHttpClient
 
 #if os(iOS)
 
@@ -53,7 +54,7 @@ open class AudioPlayer: NSObject {
 
   let notificationCenter = NotificationCenter.default
 
-  public var audioPlayerSettings: StringConfigFile?
+  public var audioPlayerSettings: ConfigFile<String>?
 
   let audioSession = AVAudioSession.sharedInstance()
 
@@ -92,9 +93,9 @@ open class AudioPlayer: NSObject {
   public init(_ propertiesFileName: String) {
     self.propertiesFileName = propertiesFileName
 
-    let audioPlayerSettingsFileName = NSHomeDirectory() + "/Library/Caches/" + propertiesFileName
+    let audioPlayerSettingsPath = URL(fileURLWithPath: NSHomeDirectory() + "/Library/Caches")
 
-    audioPlayerSettings = StringConfigFile(audioPlayerSettingsFileName)
+    audioPlayerSettings = ConfigFile<String>(path: audioPlayerSettingsPath, fileName: propertiesFileName)
 
     UIApplication.shared.beginReceivingRemoteControlEvents() // begin receiving remote events
 
@@ -235,7 +236,7 @@ open class AudioPlayer: NSObject {
   open func loadPlayer() {
     if let settings = audioPlayerSettings {
       do {
-        try settings.load()
+        try settings.read()
       }
       catch let error {
         print("Error loading config file: \(error)")
@@ -272,7 +273,7 @@ open class AudioPlayer: NSObject {
       settings.add(key: "currentSongPosition", value: String(currentSongPosition))
 
       do {
-        try settings.save()
+        try settings.write()
       }
       catch let error {
         print("Error saving config file: \(error)")
@@ -417,6 +418,11 @@ extension AudioPlayer {
   func play(newPlayer: Bool=false, songPosition: Float=0) {
     if createNewPlayer(newPlayer: newPlayer, songPosition: songPosition) {
       print("play")
+
+      if self.reconnectTimer {
+        destroyReconnectTimer()
+      }
+
       ui?.displayPlay()
 
       startProgressTimer()
@@ -431,35 +437,39 @@ extension AudioPlayer {
 
       pause()
 
-      let alert = UIAlertController(title: "Error", message: "Cannot build player", preferredStyle: .alert);
-
-      let okAction = UIAlertAction(title: "OK", style: .default) { _ in
-        //let reconnectTimer = Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { _ in
-          self.play()
-        //}
+      if !self.reconnectTimer {
+        createReconnectTimer()
       }
 
-      alert.addAction(okAction)
+//      let alert = UIAlertController(title: "Error", message: "Cannot build player", preferredStyle: .alert);
+//
+//      let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+//        //let reconnectTimer = Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { _ in
+//          self.play()
+//        //}
+//      }
+//
+//      alert.addAction(okAction)
+//
+//      if let controller = getTopViewController() {
+//        controller.present(alert, animated: true)
+//      }
+    }
+  }
 
-      if let controller = getTopViewController() {
-        controller.present(alert, animated: true)
+  func createReconnectTimer() {
+    DispatchQueue.main.async {
+      self.reconnectTimer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in
+        self.play()
       }
     }
   }
 
-//  func createReconnectTimer() {
-//    DispatchQueue.main.async {
-//      self.reconnectTimer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in
-//        self.play()
-//      }
-//    }
-//  }
-//
-//  func destroyReconnectTimer() {
-//    reconnectTimer?.invalidate()
-//
-//    reconnectTimer = nil
-//  }
+  func destroyReconnectTimer() {
+    reconnectTimer?.invalidate()
+
+    reconnectTimer = nil
+  }
 
   func getTopViewController(controller: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
     if let navigationController = controller as? UINavigationController {
