@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
 #  s.dependency 'Files', '~> 2.0.1'
 #  s.dependency 'ConfigFile', '~> 1.1.0'
   s.dependency 'PageLoader', '~> 1.0.0'
-  s.dependency 'SimpleHttpClient', '~> 1.0.2'
+  s.dependency 'SimpleHttpClient', '~> 1.0.3'
 
   #s.pod_target_xcconfig = { 'SWIFT_VERSION' => swift_version }
   s.pod_target_xcconfig = { 'SWIFT_VERSION' => '5.0' }

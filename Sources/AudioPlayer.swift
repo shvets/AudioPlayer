@@ -278,7 +278,7 @@ open class AudioPlayer: NSObject {
 
       do {
         try Await.await { handler in
-          try self.audioPlayerSettings!.write(handler)
+          self.audioPlayerSettings?.write(handler)
         }
       }
       catch let error {
