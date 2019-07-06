@@ -2,7 +2,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "AudioPlayer"
-  s.version      = "1.0.15"
+  s.version      = "1.0.16"
   s.summary      = "Audio Player"
   s.description  = "Audio Player description"
 
