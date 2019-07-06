@@ -29,7 +29,7 @@ open class AudioPlayer: NSObject {
     set {
       if AudioPlayer.player.propertiesFileName != newValue &&
            AudioPlayer.player.player.timeControlStatus == .playing {
-        AudioPlayer.player.pause()
+        //AudioPlayer.player.pause()
       }
 
       _propertiesFileName = newValue
@@ -289,36 +289,29 @@ open class AudioPlayer: NSObject {
     return url
   }
 
-#endif
-
-}
-
-extension AudioPlayer {
-
-#if os(iOS)
-
   func setupPlayer() {
-    let oldCurrentBookId = currentBookId
-    let oldCurrentTrackIndex = currentTrackIndex
-
-    loadPlayer()
-
-    let isAnotherBook = oldCurrentBookId != selectedBookId
-    let isAnotherTrack = isAnotherBook || oldCurrentTrackIndex != selectedItemId
-
-    if isAnotherBook {
+//    let isAnotherBook = currentBookId != selectedBookId
+//    let isAnotherTrack = isAnotherBook || currentTrackIndex != selectedItemId
+//    let isNewPlayer = currentTrackIndex == -1 || isAnotherTrack
+//
+//    if isAnotherBook {
       currentBookId = selectedBookId ?? ""
       currentBookName = selectedBookName ?? ""
       currentBookThumb = selectedBookThumb ?? ""
-    }
+    //}
 
     currentTrackIndex = selectedItemId ?? -1
 
-    if isAnotherBook || isAnotherTrack {
+    //if isAnotherBook || isAnotherTrack {
       player.replaceCurrentItem(with: nil)
 
       currentTrackIndex = selectedItemId ?? -1
-    }
+      //currentSongPosition = -1
+    //}
+
+    //currentSongPosition = -1
+
+    //save()
 
     ui?.updateTitle(currentAudioItem.name)
 
@@ -326,40 +319,40 @@ extension AudioPlayer {
       status = .playing
     }
 
-    if isAnotherBook || isAnotherTrack {
+    //if isNewPlayer || isAnotherBook || isAnotherTrack {
       stop()
 
       play(newPlayer: true, songPosition: currentSongPosition)
-    }
-    else {
-      ui?.update()
-
-      print("init: \(status)")
-      if status == .playing {
-        ui?.startAnimate()
-        ui?.stopAnimate()
-        startProgressTimer()
-        print("init: displayPause1")
-        ui?.displayPause()
-      }
-      else if status == .ready {
-        play(newPlayer: true, songPosition: currentSongPosition)
-      }
-      else if status == .paused {
-        ui?.startAnimate()
-        ui?.stopAnimate()
-        startProgressTimer()
-        print("init: displayPlay")
-        ui?.displayPlay()
-      }
-      else {
-        ui?.startAnimate()
-        ui?.stopAnimate()
-        startProgressTimer()
-        print("init: displayPause2")
-        ui?.displayPause()
-      }
-    }
+//    }
+//    else {
+//      ui?.update()
+//
+//      print("init: \(status)")
+//      if status == .playing {
+//        ui?.startAnimate()
+//        ui?.stopAnimate()
+//        startProgressTimer()
+//        print("init: displayPause1")
+//        ui?.displayPause()
+//      }
+//      else if status == .ready {
+//        play(newPlayer: true, songPosition: currentSongPosition)
+//      }
+//      else if status == .paused {
+//        ui?.startAnimate()
+//        ui?.stopAnimate()
+//        startProgressTimer()
+//        print("init: displayPlay")
+//        ui?.displayPlay()
+//      }
+//      else {
+//        ui?.startAnimate()
+//        ui?.stopAnimate()
+//        startProgressTimer()
+//        print("init: displayPause2")
+//        ui?.displayPause()
+//      }
+//    }
   }
 
   func createNewPlayer(newPlayer: Bool=false, songPosition: Float=0) -> Bool {

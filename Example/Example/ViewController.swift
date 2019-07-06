@@ -37,7 +37,8 @@ class ViewController: UIViewController {
             destination.selectedBookId = book!["id"]
             destination.selectedItemId = 0
             destination.audioPlayer.propertiesFileName = ViewController.audioPlayerPropertiesFileName1
-
+            destination.audioPlayer.loadPlayer()
+            
             destination.items = []
 
             for item in items! {
@@ -53,6 +54,7 @@ class ViewController: UIViewController {
             destination.selectedBookId = book!["id"]
             destination.selectedItemId = 0
             destination.audioPlayer.propertiesFileName = ViewController.audioPlayerPropertiesFileName2
+            destination.audioPlayer.loadPlayer()
 
             destination.items = []
 
