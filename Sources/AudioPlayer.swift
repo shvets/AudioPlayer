@@ -13,7 +13,7 @@ open class AudioPlayer: NSObject {
 //, AVAssetResourceLoaderDelegate {
 
 #if os(iOS)
-  private let audioPlayerSettingsPath = URL(fileURLWithPath: NSHomeDirectory() + "/Library/Caches")
+  private static let audioPlayerSettingsPath = URL(fileURLWithPath: NSHomeDirectory() + "/Library/Caches")
 
   public static let player = AudioPlayer()
 
@@ -35,7 +35,7 @@ open class AudioPlayer: NSObject {
       _propertiesFileName = newValue
 
       if let fileName = newValue {
-        audioPlayerSettings = ConfigFile<String>(path: audioPlayerSettingsPath, fileName: fileName)
+        audioPlayerSettings = ConfigFile<String>(path: AudioPlayer.audioPlayerSettingsPath, fileName: fileName)
       }
     }
   }
@@ -294,6 +294,8 @@ open class AudioPlayer: NSObject {
 //    let isAnotherTrack = isAnotherBook || currentTrackIndex != selectedItemId
 //    let isNewPlayer = currentTrackIndex == -1 || isAnotherTrack
 //
+    let isAnotherTrack = currentTrackIndex != selectedItemId
+    
 //    if isAnotherBook {
       currentBookId = selectedBookId ?? ""
       currentBookName = selectedBookName ?? ""
@@ -303,15 +305,16 @@ open class AudioPlayer: NSObject {
     currentTrackIndex = selectedItemId ?? -1
 
     //if isAnotherBook || isAnotherTrack {
+    if isAnotherTrack {
       player.replaceCurrentItem(with: nil)
 
       currentTrackIndex = selectedItemId ?? -1
-      //currentSongPosition = -1
-    //}
+      currentSongPosition = -1
+    }
 
     //currentSongPosition = -1
 
-    //save()
+    save()
 
     ui?.updateTitle(currentAudioItem.name)
 
