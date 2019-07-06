@@ -1,13 +1,20 @@
 import UIKit
 import AudioPlayer
-import WebAPI
+import MediaApis
 
 class ViewController: UIViewController {
+  static let audioPlayerPropertiesFileName1 = "audio-boo-player-settings.json"
+  static let audioPlayerPropertiesFileName2 = "bookzvook-player-settings.json"
+
   override func viewDidLoad() {
     super.viewDidLoad()
   }
   
-  @IBAction func play(_ sender: UIButton) {
+  @IBAction func play1(_ sender: UIButton) {
+    performSegue(withIdentifier: "Play", sender: sender)
+  }
+  
+  @IBAction func play2(_ sender: UIButton) {
     performSegue(withIdentifier: "Play", sender: sender)
   }
   
@@ -20,42 +27,88 @@ class ViewController: UIViewController {
     
     if let destination = segue.destination as? AudioPlayerController {
       do {
-        let api = AudioKnigiAPI()
+        if let identifier = (sender as! UIButton).titleLabel!.text {
+          switch identifier {
+          case "Play1":
+            let (book, items) = try getItems1()
 
-        let authors = try api.getAuthors()["movies"] as! [Any]
-
-        let author = authors.filter { item in
-          if let item = item as? [String: String] {
-            return item["name"] == "Мартин Джордж"
-          }
-          else {
-            return false
-          }
-        }.first
-        
-        if let author = author as? [String: String] {
-          let books = try api.getBooks(path: author["id"]!)["movies"] as! [Any]
-          
-          if let book = books[1] as? [String: String] {
-            let items = try api.getAudioTracks(book["id"]!)
-            
-            destination.coverImageUrl = book["thumb"]
-            destination.parentName = book["name"]
-            destination.selectedBookId = book["id"]
+            destination.coverImageUrl = book!["thumb"]
+            destination.parentName = book!["name"]
+            destination.selectedBookId = book!["id"]
             destination.selectedItemId = 0
-            
+            destination.audioPlayer.propertiesFileName = ViewController.audioPlayerPropertiesFileName1
+
             destination.items = []
-            
-            for item in items {
+
+            for item in items! {
+              destination.items.append(AudioItem(name: item.title, id: item.url!))
+            }
+
+          //          destination.loadAudioItems = AudioKnigiMediaItemsController.loadAudioItems(currentBookId, dataSource: dataSource)
+          case "Play2":
+            let (book, items) = try getItems2()
+
+            destination.coverImageUrl = ""
+            destination.parentName = book!["name"]
+            destination.selectedBookId = book!["id"]
+            destination.selectedItemId = 0
+            destination.audioPlayer.propertiesFileName = ViewController.audioPlayerPropertiesFileName2
+
+            destination.items = []
+
+            for item in items! {
               destination.items.append(AudioItem(name: item.title, id: item.url))
             }
+          default:
+            print("")
           }
         }
       }
       catch let error {
-        print("Errpr: \(error)")
+        print("Error: \(error)")
       }
     }
+  }
+
+  func getItems1() throws -> (AudioKnigiAPI.BookItem?, [AudioKnigiAPI.Track]?) {
+    var book: AudioKnigiAPI.BookItem? = nil
+    var items: [AudioKnigiAPI.Track]? = nil
+
+    let api = AudioKnigiAPI()
+
+    let authors = try api.getAuthors().items
+
+    let author = authors.filter { item in
+      return item["name"] == "Мартин Джордж"
+      }.first
+    
+    if let author = author {
+      let books = try api.getBooks(path: author["id"]!).items
+      
+      book = books[1]
+      items = try api.getAudioTracks(book!["id"]!)
+    }
+    
+    return (book, items)
+  }
+
+  func getItems2() throws -> (BookZvookAPI.BookItem?, [BookZvookAPI.BooTrack]?) {
+    var book: BookZvookAPI.BookItem? = nil
+    var items: [BookZvookAPI.BooTrack]? = nil
+
+    let api = BookZvookAPI()
+
+    let id = "http://bookzvuk.ru/avtor-na-bukvu-p/"
+
+    let books = try api.getAuthorBooks(id, name: "Пратчетт Терри").items
+
+    book = books[1]
+    
+    let playlistUrls = try api.getPlaylistUrls(book!["id"]!)
+    
+    items = try api.getAudioTracks(playlistUrls[0])
+
+    return (book, items)
   }
   
 }

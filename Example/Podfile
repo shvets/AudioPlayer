@@ -4,11 +4,11 @@ source 'https://github.com/shvets/Specs.git'
 use_frameworks!
 
 target 'Example' do
-  platform :ios, '10.0'
+  platform :ios, '12.2'
 
   pod 'AudioPlayer', :path => '../'
-  #pod 'WebAPI', :path => '../../WebAPI'
-  
+  pod 'MediaApis', :path => '../../MediaApis'
+
   podspec :path => 'Example.podspec'
 
   target 'ExampleTests' do

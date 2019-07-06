@@ -9,15 +9,13 @@ Pod::Spec.new do |s|
   s.license      = "MIT"
   s.source = { :git => "https://github.com/shvets/AudioPlayer.git", :tag => s.version }
 
-  s.ios.deployment_target = "10.0"
+  s.ios.deployment_target = "12.2"
   #s.osx.deployment_target = "10.10"
-  s.tvos.deployment_target = "10.0"
+  s.tvos.deployment_target = "12.2"
   #s.watchos.deployment_target = "2.0"
 
   s.source_files = "Sources/**/*.swift"
   s.resources = "../Sources/Assets/**/*.xcassets"
 
-  s.dependency 'WebAPI', '~> 1.0.11'
-
-  s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4' }
+  s.pod_target_xcconfig = { 'SWIFT_VERSION' => '5' }
 end

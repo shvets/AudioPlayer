@@ -13,36 +13,31 @@ open class AudioPlayer: NSObject {
 //, AVAssetResourceLoaderDelegate {
 
 #if os(iOS)
-  public static var players: [AudioPlayer] = []
+  private let audioPlayerSettingsPath = URL(fileURLWithPath: NSHomeDirectory() + "/Library/Caches")
 
-  public static func addPlayer(_ player: AudioPlayer) {
-    players.append(player)
-  }
+  public static let player = AudioPlayer()
 
-  public static func getAudioPlayer(_ propertiesFileName: String) -> AudioPlayer {
-    var player: AudioPlayer
+  public var audioPlayerSettings: ConfigFile<String>?
 
-    let players = AudioPlayer.players
+  private var _propertiesFileName: String?
 
-    for player in players {
-      if player.propertiesFileName != propertiesFileName &&
-        player.player.timeControlStatus == .playing {
-        player.pause()
+  public var propertiesFileName: String? {
+    get {
+      return _propertiesFileName
+    }
+
+    set {
+      if AudioPlayer.player.propertiesFileName != newValue &&
+           AudioPlayer.player.player.timeControlStatus == .playing {
+        AudioPlayer.player.pause()
+      }
+
+      _propertiesFileName = newValue
+
+      if let fileName = newValue {
+        audioPlayerSettings = ConfigFile<String>(path: audioPlayerSettingsPath, fileName: fileName)
       }
     }
-
-    if let index = players.firstIndex(where: { $0.propertiesFileName == propertiesFileName }) {
-      player = players[index]
-    }
-    else {
-      player = AudioPlayer(propertiesFileName)
-
-      AudioPlayer.addPlayer(player)
-    }
-
-    player.loadPlayer()
-
-    return player
   }
 
   public enum Status: Int {
@@ -53,8 +48,6 @@ open class AudioPlayer: NSObject {
   }
 
   let notificationCenter = NotificationCenter.default
-
-  public var audioPlayerSettings: ConfigFile<String>?
 
   let audioSession = AVAudioSession.sharedInstance()
 
@@ -88,15 +81,7 @@ open class AudioPlayer: NSObject {
 
   weak var ui: AudioPlayerUI?
 
-  var propertiesFileName: String!
-
-  public init(_ propertiesFileName: String) {
-    self.propertiesFileName = propertiesFileName
-
-    let audioPlayerSettingsPath = URL(fileURLWithPath: NSHomeDirectory() + "/Library/Caches")
-
-    audioPlayerSettings = ConfigFile<String>(path: audioPlayerSettingsPath, fileName: propertiesFileName)
-
+  override public init() {
     UIApplication.shared.beginReceivingRemoteControlEvents() // begin receiving remote events
 
     do {
@@ -153,6 +138,9 @@ open class AudioPlayer: NSObject {
     if let url = NSURL(string: urlPath),
        let data = NSData(contentsOf: url as URL) {
       coverImage = UIImage(data: data as Data)
+    }
+    else {
+      coverImage = nil
     }
   }
 
@@ -310,9 +298,13 @@ extension AudioPlayer {
 #if os(iOS)
 
   func setupPlayer() {
-    let isAnotherBook = currentBookId != selectedBookId
-    let isAnotherTrack = isAnotherBook || currentTrackIndex != selectedItemId
-    let isNewPlayer = currentTrackIndex == -1 || isAnotherTrack
+    let oldCurrentBookId = currentBookId
+    let oldCurrentTrackIndex = currentTrackIndex
+
+    loadPlayer()
+
+    let isAnotherBook = oldCurrentBookId != selectedBookId
+    let isAnotherTrack = isAnotherBook || oldCurrentTrackIndex != selectedItemId
 
     if isAnotherBook {
       currentBookId = selectedBookId ?? ""
@@ -326,10 +318,7 @@ extension AudioPlayer {
       player.replaceCurrentItem(with: nil)
 
       currentTrackIndex = selectedItemId ?? -1
-      currentSongPosition = -1
     }
-
-    save()
 
     ui?.updateTitle(currentAudioItem.name)
 
@@ -337,10 +326,10 @@ extension AudioPlayer {
       status = .playing
     }
 
-    if isNewPlayer || isAnotherBook || isAnotherTrack {
+    if isAnotherBook || isAnotherTrack {
       stop()
 
-      play()
+      play(newPlayer: true, songPosition: currentSongPosition)
     }
     else {
       ui?.update()

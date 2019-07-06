@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GG8-pn-EjY">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
-        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,24 +19,33 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="24C-Dt-hcJ">
-                                <rect key="frame" x="97" y="51" width="135" height="36"/>
+                                <rect key="frame" x="97" y="110" width="135" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Play"/>
+                                <state key="normal" title="Play1"/>
                                 <connections>
-                                    <action selector="play:" destination="BYZ-38-t0r" eventType="touchUpInside" id="etP-li-aH8"/>
+                                    <action selector="play1:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8Sr-rP-qbC"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xGr-nZ-7wZ">
+                                <rect key="frame" x="97" y="170" width="135" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Play2"/>
+                                <connections>
+                                    <action selector="play2:" destination="BYZ-38-t0r" eventType="touchUpInside" id="G92-Ja-jcc"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" id="mXR-fH-LRE"/>
                     <connections>
                         <segue destination="TWL-nM-emt" kind="show" identifier="Play" id="D2B-a8-9JB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="32.799999999999997" y="31.934032983508249"/>
+            <point key="canvasLocation" x="972" y="31.934032983508249"/>
         </scene>
         <!--Audio Player Controller-->
         <scene sceneID="jHW-DC-Mgy">
@@ -180,7 +188,7 @@
                                                 <color key="backgroundColor" red="0.93966859579999995" green="0.99699360130000003" blue="0.95983451600000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lfu-KR-aKl">
-                                                <rect key="frame" x="49" y="0.0" width="48" height="50"/>
+                                                <rect key="frame" x="49" y="0.0" width="48" height="51"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="48" id="CtS-yT-2sc"/>
                                                 </constraints>
@@ -258,10 +266,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QjF-Tp-5a7">
-                                <rect key="frame" x="4" y="10" width="367" height="340"/>
+                                <rect key="frame" x="4" y="54" width="367" height="296"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3rE-vf-VY9">
-                                        <rect key="frame" x="82" y="18" width="200" height="300"/>
+                                        <rect key="frame" x="82" y="18" width="200" height="256"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.93966859579999995" green="0.99699360130000003" blue="0.95983451600000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -326,16 +334,34 @@
             </objects>
             <point key="canvasLocation" x="140" y="987"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Tkg-SO-ErR">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GG8-pn-EjY" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="9tk-Et-fhK">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Pdz-2x-BzI"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="s1S-St-fd0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="32.799999999999997" y="31.934032983508249"/>
+        </scene>
     </scenes>
     <resources>
-        <image name="Fast Forward" width="16" height="16"/>
-        <image name="Fast Forward Filled" width="16" height="16"/>
-        <image name="High Volume Filled" width="16" height="16"/>
-        <image name="Low Volume Filled" width="16" height="16"/>
-        <image name="Play" width="16" height="16"/>
-        <image name="Rewind" width="16" height="16"/>
-        <image name="Rewind Filled" width="16" height="16"/>
-        <image name="Skip to Start Filled" width="16" height="16"/>
-        <image name="Stop" width="16" height="16"/>
+        <image name="Fast Forward" width="25" height="25"/>
+        <image name="Fast Forward Filled" width="25" height="25"/>
+        <image name="High Volume Filled" width="25" height="25"/>
+        <image name="Low Volume Filled" width="25" height="25"/>
+        <image name="Play" width="25" height="25"/>
+        <image name="Rewind" width="25" height="25"/>
+        <image name="Rewind Filled" width="25" height="25"/>
+        <image name="Skip to Start Filled" width="25" height="25"/>
+        <image name="Stop" width="25" height="25"/>
     </resources>
 </document>

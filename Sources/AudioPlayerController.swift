@@ -20,7 +20,7 @@ open class AudioPlayerController: UIViewController, AudioPlayerUI {
 
 #if os(iOS)
 
-  var audioPlayer: AudioPlayer!
+  public var audioPlayer = AudioPlayer.player
 
   @IBOutlet fileprivate weak var poster: UIImageView!
   @IBOutlet fileprivate weak var playbackSlider: UISlider!
