@@ -6,6 +6,7 @@ import UIKit
 
 import PageLoader
 import AVFoundation
+import SimpleHttpClient
 
 open class AudioItemsController: UITableViewController {
   public static let SegueIdentifier = "Audio Items"
@@ -14,17 +15,24 @@ open class AudioItemsController: UITableViewController {
 
   public let pageLoader = PageLoader()
 
-  public var audioPlayer: AudioPlayer!
+  public var selectedBookId: String!
+  public var selectedBookName: String!
+  public var selectedBookThumb: String!
+  public var selectedItemId: Int!
+  public var currentSongPosition: Float!
 
-  public var name: String?
-  public var thumb: String?
-  public var id: String?
   public var version: Int = 0
+
+  public var playerSettings: ConfigFile<String>!
 
   public var loadAudioItems: (() throws -> [Any])?
 
   public var items: [AudioItem] = []
-  
+
+  public var audioPlayer = AudioPlayer.player
+
+  private var visited = false
+
 #if os(iOS)
 
   public let activityIndicatorView = UIActivityIndicatorView(style: .gray)
@@ -33,8 +41,8 @@ open class AudioItemsController: UITableViewController {
 
   override open func viewDidLoad() {
     super.viewDidLoad()
-    
-    title = name
+
+    title = selectedBookName
 
     tableView?.backgroundView = activityIndicatorView
 
@@ -49,7 +57,7 @@ open class AudioItemsController: UITableViewController {
         if let items = result as? [AudioItem] {
           self.items = items
         }
-        
+
         self.tableView?.reloadData()
       }
     }
@@ -57,12 +65,14 @@ open class AudioItemsController: UITableViewController {
 
   func navigateToSelectedRow() {
     if loaded {
-      let currentTrackIndex = audioPlayer.currentTrackIndex
+      if let index = visited ? Int(playerSettings.items["selectedItemId"]!) : selectedItemId {
+        let selectedItemId = Int(index)
 
-      if isSameBook() && currentTrackIndex != -1 {
-        let indexPath = IndexPath(row: currentTrackIndex, section: 0)
-        tableView?.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
-        tableView.scrollToRow(at: indexPath, at: .middle, animated: true)
+        if isSameBook() && selectedItemId != -1 {
+          let indexPath = IndexPath(row: selectedItemId, section: 0)
+          tableView?.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
+          tableView.scrollToRow(at: indexPath, at: .middle, animated: true)
+        }
       }
     }
   }
@@ -74,17 +84,19 @@ open class AudioItemsController: UITableViewController {
   }
 
   func isSameBook() -> Bool {
-    guard let id = id else {
+    guard let bookId = playerSettings.items["selectedBookId"] else {
       return false
     }
-    
-    return id == audioPlayer.currentBookId
+
+    return bookId == selectedBookId
   }
 
-  func isSameTrack(_ row: Int) -> Bool {
-    let currentTrackIndex = audioPlayer.currentTrackIndex
+  func isSameTrack(_ itemId: Int) -> Bool {
+    guard let selectedItemId = Int(playerSettings.items["selectedItemId"]!) else {
+      return false
+    }
 
-    return currentTrackIndex != -1 && row == currentTrackIndex
+    return selectedItemId != -1 && itemId == selectedItemId
   }
 
   override open func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -138,22 +150,67 @@ open class AudioItemsController: UITableViewController {
 
   // MARK: Navigation
 
+  func isSameBook2() -> Bool {
+    if let bookId = playerSettings.items["selectedBookId"] {
+      return !bookId.isEmpty && bookId == selectedBookId
+    }
+    else {
+      return false
+    }
+  }
+
+  func isSameTrack2() -> Bool {
+    if let itemId = playerSettings.items["selectedItemId"] {
+      return !itemId.isEmpty && Int(itemId)! == selectedItemId
+    }
+    else {
+      return false
+    }
+  }
+
   override open func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if let identifier = segue.identifier {
       switch identifier {
         case AudioPlayerController.SegueIdentifier:
           if let destination = segue.destination as? AudioPlayerController {
-            destination.parentName = name ?? ""
-            destination.coverImageUrl = thumb ?? ""
+            destination.parentName = selectedBookName ?? ""
+            destination.coverImageUrl = selectedBookThumb ?? ""
             destination.items = items
-            destination.selectedBookId = id ?? ""
-            destination.selectedBookName = name ?? ""
-            destination.selectedBookThumb = thumb ?? ""
-            destination.audioPlayer = audioPlayer
+            destination.playerSettings = playerSettings
 
             if let cell = sender as? UITableViewCell,
                let indexPath = tableView?.indexPath(for: cell) {
+              destination.selectedBookId = selectedBookId
+              destination.selectedBookName = selectedBookName
+              destination.selectedBookThumb = selectedBookThumb
               destination.selectedItemId = indexPath.row
+              destination.currentSongPosition = currentSongPosition
+
+              selectedItemId = indexPath.row
+
+              AudioPlayer.saveSettings(playerSettings)
+
+              audioPlayer.items = items
+
+              let sameBook = isSameBook2()
+              let sameTrack = isSameTrack2()
+
+              let newPlayer = audioPlayer.selectedBookId != nil && audioPlayer.selectedItemId != -1 &&
+                audioPlayer.selectedBookId != selectedBookId || audioPlayer.selectedItemId != selectedItemId
+
+              audioPlayer.selectedBookId = selectedBookId
+              audioPlayer.selectedBookName = selectedBookName
+              audioPlayer.selectedBookThumb = selectedBookThumb
+              audioPlayer.selectedItemId = selectedItemId
+              audioPlayer.currentSongPosition = currentSongPosition ?? -1
+
+              audioPlayer.playerSettings = playerSettings
+
+              audioPlayer.setupPlayer(sameBook: sameBook, sameTrack: sameTrack, newPlayer: newPlayer)
+
+              audioPlayer.save()
+
+              visited = true
             }
           }
 

@@ -13,32 +13,43 @@ open class AudioPlayer: NSObject {
 //, AVAssetResourceLoaderDelegate {
 
 #if os(iOS)
-  private static let audioPlayerSettingsPath = URL(fileURLWithPath: NSHomeDirectory() + "/Library/Caches")
+  public static let audioPlayerSettingsPath = URL(fileURLWithPath: NSHomeDirectory() + "/Library/Caches")
+
+  public static func createSettings(_ fileName: String) -> ConfigFile<String> {
+    return ConfigFile<String>(path: audioPlayerSettingsPath, fileName: fileName)
+  }
+
+  public static func readSettings(_ fileName: String) -> ConfigFile<String> {
+    let settings = createSettings(fileName)
+
+    do {
+      if let items = (try Await.await { handler in
+        settings.read(handler)
+      }) {
+        settings.items = items
+      }
+    }
+    catch let error {
+      print("Error loading config file: \(error)")
+    }
+
+    return settings
+  }
+
+  public static func saveSettings(_ settings: ConfigFile<String>) {
+    do {
+      try Await.await { handler in
+        settings.write(handler)
+      }
+    }
+    catch let error {
+      print("Error saving config file: \(error)")
+    }
+  }
 
   public static let player = AudioPlayer()
 
-  public var audioPlayerSettings: ConfigFile<String>?
-
-  private var _propertiesFileName: String?
-
-  public var propertiesFileName: String? {
-    get {
-      return _propertiesFileName
-    }
-
-    set {
-      if AudioPlayer.player.propertiesFileName != newValue &&
-           AudioPlayer.player.player.timeControlStatus == .playing {
-        //AudioPlayer.player.pause()
-      }
-
-      _propertiesFileName = newValue
-
-      if let fileName = newValue {
-        audioPlayerSettings = ConfigFile<String>(path: AudioPlayer.audioPlayerSettingsPath, fileName: fileName)
-      }
-    }
-  }
+  public var playerSettings: ConfigFile<String>!
 
   public enum Status: Int {
     case ready = 1
@@ -54,7 +65,7 @@ open class AudioPlayer: NSObject {
   var timeObserver: AnyObject?
 
   var currentAudioItem: AudioItem {
-    return items[currentTrackIndex]
+    return items[selectedItemId]
   }
 
   var player = AVPlayer()
@@ -63,21 +74,17 @@ open class AudioPlayer: NSObject {
   var savePlayerPositionTimer: Timer?
   var reconnectTimer: Timer?
 
-  public var currentBookId: String = ""
-  public var currentBookName: String = ""
-  public var currentBookThumb: String = ""
-
-  public var currentTrackIndex: Int = -1
-  public var currentSongPosition: Float = -1
   public var items: [AudioItem] = []
 
   public var coverImage: UIImage?
   var authorName: String?
   var bookName: String?
+
   var selectedBookId: String?
   var selectedBookName: String?
   var selectedBookThumb: String?
-  var selectedItemId: Int?
+  var selectedItemId: Int = -1
+  public var currentSongPosition: Float = -1
 
   weak var ui: AudioPlayerUI?
 
@@ -117,7 +124,7 @@ open class AudioPlayer: NSObject {
   func getNewPlayerItem() -> AVPlayerItem? {
     var playerItem: AVPlayerItem?
 
-    if let path = items[currentTrackIndex].id.removingPercentEncoding {
+    if let path = items[selectedItemId].id.removingPercentEncoding {
       if let audioPath = getMediaUrl(path: path) {
         let asset = AVURLAsset(url: audioPath, options: nil)
 
@@ -164,8 +171,8 @@ open class AudioPlayer: NSObject {
   }
 
   func navigateToNextTrack() -> Bool {
-    if currentTrackIndex < items.count-1 {
-      currentTrackIndex = currentTrackIndex+1
+    if selectedItemId < items.count-1 {
+      selectedItemId = selectedItemId+1
 
       return true
     }
@@ -174,8 +181,8 @@ open class AudioPlayer: NSObject {
   }
 
   func navigateToPreviousTrack() -> Bool {
-    if currentTrackIndex > 0 {
-      currentTrackIndex = currentTrackIndex-1
+    if selectedItemId > 0 {
+      selectedItemId = selectedItemId-1
 
       return true
     }
@@ -221,58 +228,14 @@ open class AudioPlayer: NSObject {
     backgroundIdentifier = UIBackgroundTaskIdentifier.invalid
   }
 
-  open func loadPlayer() {
-    if let settings = audioPlayerSettings {
-      do {
-        if let items = (try Await.await { handler in
-          settings.read(handler)
-        }) {
-          settings.items = items
-        }
-      }
-      catch let error {
-        print("Error loading config file: \(error)")
-      }
-
-      if let value = settings.items["currentBookId"] {
-        currentBookId = value
-      }
-
-      if let value = settings.items["currentBookName"] {
-        currentBookName = value
-      }
-
-      if let value = settings.items["currentBookThumb"] {
-        currentBookThumb = value
-      }
-
-      if let value = settings.items["currentTrackIndex"] {
-        currentTrackIndex = (value as AnyObject).integerValue
-      }
-
-      if let value = settings.items["currentSongPosition"] {
-        currentSongPosition = (value as AnyObject).floatValue
-      }
-    }
-  }
-
   func save() {
-    if let settings = audioPlayerSettings {
-      settings.add(key: "currentBookId", value: currentBookId)
-      settings.add(key: "currentBookName", value: currentBookName)
-      settings.add(key: "currentBookThumb", value: currentBookThumb)
-      settings.add(key: "currentTrackIndex", value: String(currentTrackIndex))
-      settings.add(key: "currentSongPosition", value: String(currentSongPosition))
+    playerSettings.add(key: "selectedBookId", value: String(selectedBookId!))
+    playerSettings.add(key: "selectedBookName", value: String(selectedBookName!))
+    playerSettings.add(key: "selectedBookThumb", value: String(selectedBookThumb!))
+    playerSettings.add(key: "selectedItemId", value: String(selectedItemId))
+    playerSettings.add(key: "currentSongPosition", value: String(currentSongPosition))
 
-      do {
-        try Await.await { handler in
-          self.audioPlayerSettings?.write(handler)
-        }
-      }
-      catch let error {
-        print("Error saving config file: \(error)")
-      }
-    }
+    AudioPlayer.saveSettings(playerSettings)
   }
 
   private func getMediaUrl(path: String) -> URL? {
@@ -288,74 +251,54 @@ open class AudioPlayer: NSObject {
 
     return url
   }
-
-  func setupPlayer() {
-//    let isAnotherBook = currentBookId != selectedBookId
-//    let isAnotherTrack = isAnotherBook || currentTrackIndex != selectedItemId
-//    let isNewPlayer = currentTrackIndex == -1 || isAnotherTrack
-//
-    let isAnotherTrack = currentTrackIndex != selectedItemId
-    
-//    if isAnotherBook {
-      currentBookId = selectedBookId ?? ""
-      currentBookName = selectedBookName ?? ""
-      currentBookThumb = selectedBookThumb ?? ""
-    //}
-
-    currentTrackIndex = selectedItemId ?? -1
-
-    //if isAnotherBook || isAnotherTrack {
-    if isAnotherTrack {
+  
+  func setupPlayer(sameBook: Bool, sameTrack: Bool, newPlayer: Bool) {
+    if !sameBook || !sameTrack {
       player.replaceCurrentItem(with: nil)
 
-      currentTrackIndex = selectedItemId ?? -1
       currentSongPosition = -1
     }
-
-    //currentSongPosition = -1
-
-    save()
-
+  
     ui?.updateTitle(currentAudioItem.name)
 
     if player.timeControlStatus == .playing {
       status = .playing
     }
 
-    //if isNewPlayer || isAnotherBook || isAnotherTrack {
+    if newPlayer || !sameBook || !sameTrack {
       stop()
 
       play(newPlayer: true, songPosition: currentSongPosition)
-//    }
-//    else {
-//      ui?.update()
-//
-//      print("init: \(status)")
-//      if status == .playing {
-//        ui?.startAnimate()
-//        ui?.stopAnimate()
-//        startProgressTimer()
-//        print("init: displayPause1")
-//        ui?.displayPause()
-//      }
-//      else if status == .ready {
-//        play(newPlayer: true, songPosition: currentSongPosition)
-//      }
-//      else if status == .paused {
-//        ui?.startAnimate()
-//        ui?.stopAnimate()
-//        startProgressTimer()
-//        print("init: displayPlay")
-//        ui?.displayPlay()
-//      }
-//      else {
-//        ui?.startAnimate()
-//        ui?.stopAnimate()
-//        startProgressTimer()
-//        print("init: displayPause2")
-//        ui?.displayPause()
-//      }
-//    }
+    }
+    else {
+      ui?.update()
+
+      print("init: \(status)")
+      if status == .playing {
+        ui?.startAnimate()
+        ui?.stopAnimate()
+        startProgressTimer()
+        print("init: displayPause1")
+        ui?.displayPause()
+      }
+      else if status == .ready {
+        play(newPlayer: true, songPosition: currentSongPosition)
+      }
+      else if status == .paused {
+        ui?.startAnimate()
+        ui?.stopAnimate()
+        startProgressTimer()
+        print("init: displayPlay")
+        ui?.displayPlay()
+      }
+      else {
+        ui?.startAnimate()
+        ui?.stopAnimate()
+        startProgressTimer()
+        print("init: displayPause2")
+        ui?.displayPause()
+      }
+    }
   }
 
   func createNewPlayer(newPlayer: Bool=false, songPosition: Float=0) -> Bool {
@@ -775,7 +718,7 @@ extension AudioPlayer {
         let currentTime = currentItem.currentTime().seconds
         let duration = currentItem.asset.duration.seconds
 
-        let trackNumber = currentTrackIndex
+        let trackNumber = selectedItemId
         let trackCount = items.count
 
         var nowPlayingInfo: [String: AnyObject] = [

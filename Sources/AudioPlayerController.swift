@@ -6,6 +6,7 @@ import MediaPlayer
 #endif
 
 import AVFoundation
+import SimpleHttpClient
 
 open class AudioPlayerController: UIViewController, AudioPlayerUI {
   public static let SegueIdentifier = "Audio Player"
@@ -17,6 +18,9 @@ open class AudioPlayerController: UIViewController, AudioPlayerUI {
   public var selectedBookName: String!
   public var selectedBookThumb: String!
   public var selectedItemId: Int!
+  public var currentSongPosition: Float!
+
+  public var playerSettings: ConfigFile<String>!
 
 #if os(iOS)
 
@@ -36,7 +40,7 @@ open class AudioPlayerController: UIViewController, AudioPlayerUI {
   override open func viewDidLoad() {
     super.viewDidLoad()
 
-    title = parentName
+    title = selectedBookName
 
     playbackSlider.tintColor = UIColor.green
     playbackSlider.setThumbImage(UIImage(named: "sliderThumb"), for: UIControl.State())
@@ -44,19 +48,32 @@ open class AudioPlayerController: UIViewController, AudioPlayerUI {
     audioPlayer.ui = self
 
     audioPlayer.setCoverImage(urlPath: coverImageUrl)
-  
+
     poster.image = audioPlayer.coverImage
-  
+
     audioPlayer.authorName = getAuthorName(parentName)
     audioPlayer.bookName = getBookName(parentName)
 
     audioPlayer.items = items
+
+    let sameBook = !playerSettings.items["selectedBookId"]!.isEmpty &&
+      playerSettings.items["selectedBookId"]! == selectedBookId
+
+    let sameTrack = !playerSettings.items["selectedItemId"]!.isEmpty &&
+      Int(playerSettings.items["selectedItemId"]!)! == selectedItemId
+
+    let newPlayer = audioPlayer.selectedBookId != nil && audioPlayer.selectedItemId != -1 &&
+      audioPlayer.selectedBookId != selectedBookId || audioPlayer.selectedItemId != selectedItemId
+
     audioPlayer.selectedBookId = selectedBookId
     audioPlayer.selectedBookName = selectedBookName
     audioPlayer.selectedBookThumb = selectedBookThumb
     audioPlayer.selectedItemId = selectedItemId
+    audioPlayer.currentSongPosition = currentSongPosition ?? -1
 
-    audioPlayer.setupPlayer()
+    audioPlayer.playerSettings = playerSettings
+
+    audioPlayer.setupPlayer(sameBook: sameBook, sameTrack: sameTrack, newPlayer: newPlayer)
   }
 
   override open func viewWillDisappear(_ animated: Bool) {
@@ -72,7 +89,7 @@ open class AudioPlayerController: UIViewController, AudioPlayerUI {
 //  override open var shouldAutorotate: Bool {
 //    return false
 //  }
-  
+
   @IBAction func volumeSliderValueChanged() {
     audioPlayer.changeVolume(volumeSlider.value)
   }
@@ -213,7 +230,7 @@ extension AudioPlayerController {
 
   private func formatTime(_ time: Double) -> String {
     let (hours, minutes, seconds) = timeToHoursMinutesSeconds(time: Int(time))
-    
+
     if hours > 0 {
       return String(format: "%i:%02i:%02i", hours, minutes, seconds)
     }
@@ -221,7 +238,7 @@ extension AudioPlayerController {
       return String(format: "%02i:%02i", minutes, seconds)
     }
   }
-  
+
   func timeToHoursMinutesSeconds (time: Int) -> (Int, Int, Int) {
     return (time / 3600, (time % 3600) / 60, (time % 3600) % 60)
   }
