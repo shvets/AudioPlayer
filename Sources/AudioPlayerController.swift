@@ -55,12 +55,18 @@ open class AudioPlayerController: UIViewController, AudioPlayerUI {
     audioPlayer.bookName = getBookName(parentName)
 
     audioPlayer.items = items
-
-    let sameBook = !playerSettings.items["selectedBookId"]!.isEmpty &&
-      playerSettings.items["selectedBookId"]! == selectedBookId
-
-    let sameTrack = !playerSettings.items["selectedItemId"]!.isEmpty &&
-      Int(playerSettings.items["selectedItemId"]!)! == selectedItemId
+    
+    var sameBook = false
+    
+    if let bookId = playerSettings.items["selectedBookId"] {
+      sameBook = !bookId.isEmpty && bookId == selectedBookId
+    }
+    
+    var sameTrack = false
+    
+    if let itemId = playerSettings.items["selectedItemId"] {
+      sameTrack = !itemId.isEmpty && Int(itemId)! == selectedItemId
+    }
 
     let newPlayer = audioPlayer.selectedBookId != nil && audioPlayer.selectedItemId != -1 &&
       audioPlayer.selectedBookId != selectedBookId || audioPlayer.selectedItemId != selectedItemId

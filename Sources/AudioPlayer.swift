@@ -229,13 +229,16 @@ open class AudioPlayer: NSObject {
   }
 
   func save() {
-    playerSettings.add(key: "selectedBookId", value: String(selectedBookId!))
-    playerSettings.add(key: "selectedBookName", value: String(selectedBookName!))
-    playerSettings.add(key: "selectedBookThumb", value: String(selectedBookThumb!))
-    playerSettings.add(key: "selectedItemId", value: String(selectedItemId))
-    playerSettings.add(key: "currentSongPosition", value: String(currentSongPosition))
-
-    AudioPlayer.saveSettings(playerSettings)
+    if let selectedBookId = selectedBookId, let selectedBookName = selectedBookName,
+           let selectedBookThumb = selectedBookThumb {
+      playerSettings.add(key: "selectedBookId", value: String(selectedBookId))
+      playerSettings.add(key: "selectedBookName", value: String(selectedBookName))
+      playerSettings.add(key: "selectedBookThumb", value: String(selectedBookThumb))
+      playerSettings.add(key: "selectedItemId", value: String(selectedItemId))
+      playerSettings.add(key: "currentSongPosition", value: String(currentSongPosition))
+      
+      AudioPlayer.saveSettings(playerSettings)
+    }
   }
 
   private func getMediaUrl(path: String) -> URL? {
