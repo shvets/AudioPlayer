@@ -65,14 +65,18 @@ open class AudioItemsController: UITableViewController {
 
   func navigateToSelectedRow() {
     if loaded {
-      if let index = visited ? Int(playerSettings.items["selectedItemId"]!) : selectedItemId {
-        let selectedItemId = Int(index)
+      var index: Int = selectedItemId
+      
+      if visited, let selectedItemId = playerSettings.items["selectedItemId"] {
+        index = Int(selectedItemId)!
+      }
 
-        if isSameBook() && selectedItemId != -1 {
-          let indexPath = IndexPath(row: selectedItemId, section: 0)
-          tableView?.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
-          tableView.scrollToRow(at: indexPath, at: .middle, animated: true)
-        }
+      let selectedItemId = Int(index)
+
+      if isSameBook() && selectedItemId != -1 {
+        let indexPath = IndexPath(row: selectedItemId, section: 0)
+        tableView?.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
+        tableView.scrollToRow(at: indexPath, at: .middle, animated: true)
       }
     }
   }
