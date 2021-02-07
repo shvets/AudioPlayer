@@ -32,6 +32,8 @@ open class AudioItemsController: UITableViewController {
   public var audioPlayer = AudioPlayer.player
 
   private var visited = false
+  
+  public var requestHeaders: [String: String] = [:]
 
 #if os(iOS)
 
@@ -207,6 +209,7 @@ open class AudioItemsController: UITableViewController {
               audioPlayer.selectedBookThumb = selectedBookThumb
               audioPlayer.selectedItemId = selectedItemId
               audioPlayer.currentSongPosition = currentSongPosition ?? -1
+              audioPlayer.requestHeaders = requestHeaders
 
               audioPlayer.playerSettings = playerSettings
 

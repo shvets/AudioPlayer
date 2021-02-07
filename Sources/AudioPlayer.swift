@@ -85,6 +85,7 @@ open class AudioPlayer: NSObject {
   var selectedBookThumb: String?
   var selectedItemId: Int = -1
   public var currentSongPosition: Float = -1
+  public var requestHeaders: [String: String] = [:]
 
   weak var ui: AudioPlayerUI?
 
@@ -126,7 +127,9 @@ open class AudioPlayer: NSObject {
 
     if let path = items[selectedItemId].id.removingPercentEncoding {
       if let audioPath = getMediaUrl(path: path) {
-        let asset = AVURLAsset(url: audioPath, options: nil)
+        let options = requestHeaders.isEmpty ? nil : ["AVURLAssetHTTPHeaderFieldsKey": requestHeaders]
+
+        let asset = AVURLAsset(url: audioPath, options: options)
 
         //asset.resourceLoader.setDelegate(self, queue: DispatchQueue.main)
 
